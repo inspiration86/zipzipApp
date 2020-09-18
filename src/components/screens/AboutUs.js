@@ -27,7 +27,6 @@ export default class PicZip extends Component {
                             name='arrow-left'
                             color='#000'
                             size={25}  style={{marginLeft:10}}/>
-
                     </View>
                 </View>
                 <ScrollView>
@@ -82,6 +81,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         marginVertical: 10,
+        borderRadius:5
     },
     textAbout:{
         color: '#000',

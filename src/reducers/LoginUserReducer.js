@@ -1,20 +1,20 @@
-import {MOBILE_CHANGED, PASSWORD_CHANGED, USER_LOGIN_ATTEMP, USER_LOGIN_FAIL, USER_LOGIN_SUCCESS,USER_GET_DATA,USER_RESET_PASSWORD_SUCCESS} from '../action/TypeLoginUser';
+import {MOBILE_CHANGED,TOKEN_CHANGED, USER_LOGIN_ATTEMP, USER_LOGIN_FAIL, USER_LOGIN_SUCCESS,USER_GET_DATA} from '../action/TypeLoginUser';
 const INITIAL_STATE={
     mobile:'',
     password:'',
     dataLogin:'',
+    token:'',
     loading:false,
     error:'',
     success:false
 }
 export default(state=INITIAL_STATE,action) =>{
-    // console.log(action);
     switch (action.type) {
         case MOBILE_CHANGED:
             return{...state,mobile:action.payload };
             break;
-        case PASSWORD_CHANGED:
-            return{...state,password:action.payload };
+        case TOKEN_CHANGED:
+            return{...state,token:action.payload };
             break;
         case USER_GET_DATA:
             return{...state,dataLogin:action.payload };
@@ -23,9 +23,6 @@ export default(state=INITIAL_STATE,action) =>{
             return{...state,loading:true};
             break;
         case USER_LOGIN_SUCCESS:
-            return{...state,success: true,dataLogin: action.payload};
-            break;
-        case USER_RESET_PASSWORD_SUCCESS:
             return{...state,success: true,dataLogin: action.payload};
             break;
         case USER_LOGIN_FAIL:

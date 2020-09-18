@@ -102,22 +102,24 @@ export default class App extends Component {
                                     size={25} style={{marginHorizontal:5,marginBottom: 5,marginTop:-5}}/>
                                 <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize:16}}>Change Profile Picture</Text>
                                 <Icon
-                                    name='angle-right'
+                                    name='angle-down'
                                     color='#000'
                                     size={25} style={{marginLeft:'40%'}}/>
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
                             <View style={{backgroundColor:"#fff",marginTop:10,alignSelf:"center",borderRadius:60,borderWidth:3,borderColor:"#000",width:100,height:100}}>
-                                {/*<Image*/}
-                                {/*    style={{width: 90, height: 90, alignSelf: 'center', justifyContent: 'center'}}*/}
-                                {/*    source={require('../../../assets/images/u1.png')}*/}
-                                {/*/>*/}
+                                <Image
+                                    style={{width: 95, height: 95, alignSelf: 'center', justifyContent: 'center'}}
+                                    source={require('../../../assets/images/u1.png')}
+                                />
                             </View>
+                            <View style={{justifyContent:"center",alignItems:"center",marginLeft:'57%',marginTop:-68,backgroundColor:"#000",width:30,height:30,borderRadius:60,marginBottom:30}}>
                             <Icon
-                                name='camera'
-                                color='#000'
-                                size={35} style={{marginLeft:'45%',marginTop:-65,marginBottom: 15}}/>
+                                name='plus'
+                                color='#fff'
+                                size={20} style={{alignSelf:"center"}}/>
+                           </View>
                         </CollapseBody>
                     </Collapse>
                     <Collapse>
@@ -132,9 +134,9 @@ export default class App extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                            <View style={{backgroundColor:'#fff',height:50,width:'80%',alignSelf:'center',marginTop:10,borderWidth:3,borderColor:"#000"}}>
+                            <View style={{backgroundColor:'#fff',height:50,width:'80%',alignSelf:'center',borderRadius:5,marginTop:20,borderWidth:1,borderColor:"#000"}}>
                                 <TextInput
-                                    style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold'}}
+                                    style={{textAlign:"center",fontFamily: 'FuturaStd-Bold'}}
                                     placeholder="Please Enter New Email"
                                     underlineColorAndroid="transparent"
                                     keyboardType="email-address"
@@ -163,9 +165,9 @@ export default class App extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                            <View style={{backgroundColor:'#fff',height:50,width:'80%',alignSelf:'center',marginTop:10,borderWidth:3,borderColor:"#000"}}>
+                            <View style={{backgroundColor:'#fff',height:50,width:'80%',alignSelf:'center',borderRadius:5,marginTop:20,borderWidth:1,borderColor:"#000"}}>
                                 <TextInput
-                                    style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold'}}
+                                    style={{textAlign:"center",alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold'}}
                                     placeholder="Please Enter New Number"
                                     underlineColorAndroid="transparent"
                                     keyboardType="numeric"
@@ -193,26 +195,26 @@ export default class App extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                            <View style={{flexDirection:"row",justifyContent:'space-between',marginHorizontal:15}}>
-                            <View style={{backgroundColor:'#fff',height:50,width:'30%',alignSelf:'center',marginTop:10,borderWidth:3,borderColor:"#000"}}>
+                            <View style={{flexDirection:"row",justifyContent:'space-between',marginTop:15,marginHorizontal:15}}>
+                            <View style={{backgroundColor:'#fff',height:50,width:'30%',alignSelf:'center',marginTop:10,borderWidth:1,borderColor:"#000",borderRadius:5}}>
                                 <TextInput
-                                    style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold'}}
+                                    style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold',textAlign:"center"}}
                                     placeholder="Month"
                                     underlineColorAndroid="transparent"
                                     keyboardType="numeric"
                                     maxLength={2}
                                 /></View>
-                                <View style={{backgroundColor:'#fff',height:50,width:'30%',alignSelf:'center',marginTop:10,borderWidth:3,borderColor:"#000"}}>
+                                <View style={{backgroundColor:'#fff',height:50,width:'30%',alignSelf:'center',marginTop:10,borderWidth:1,borderColor:"#000",borderRadius:5}}>
                                     <TextInput
-                                        style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold'}}
+                                        style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold',textAlign:"center"}}
                                         placeholder="Day"
                                         underlineColorAndroid="transparent"
                                         keyboardType="numeric"
                                         maxLength={2}
                                     /></View>
-                                    <View style={{backgroundColor:'#fff',height:50,width:'30%',alignSelf:'center',marginTop:10,borderWidth:3,borderColor:"#000"}}>
+                                    <View style={{backgroundColor:'#fff',height:50,width:'30%',alignSelf:'center',marginTop:10,borderWidth:1,borderColor:"#000",borderRadius:5}}>
                                         <TextInput
-                                            style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold'}}
+                                            style={{alignItems:'flex-start',justifyContent:'flex-end',fontFamily: 'FuturaStd-Bold',textAlign:"center"}}
                                             placeholder="Year"
                                             underlineColorAndroid="transparent"
                                             keyboardType="numeric"
@@ -262,6 +264,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginVertical:10,
         marginLeft:40,
+        borderRadius:5
     },
     textButton: {
         color: '#fff',

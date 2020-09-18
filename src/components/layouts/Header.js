@@ -1,6 +1,3 @@
-
-
-
 import React, {Component} from 'react';
 import {View} from "react-native";
 import {Switch, Appbar} from 'react-native-paper';

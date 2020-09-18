@@ -64,7 +64,7 @@ export default class DocZip extends Component {
                     {/*/>*/}
 
                     <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:5,marginHorizontal:20,resizeMode:"contain",}}>
-                    <View style={{flex:5,borderWidth:this.state.btnpressed ?0 :3,borderColor:"#000",marginHorizontal:10,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",marginHorizontal:10,justifyContent:"center",alignItems:"center"}}>
                         <Text style={{
                             color: '#000',
                             fontSize: 25,
@@ -86,9 +86,9 @@ export default class DocZip extends Component {
                             {/*    color='#000'*/}
                             {/*    size={60}/>*/}
                     </View>
-                        <View style={{flex:5,justifyContent:"center",borderWidth:3,borderColor:"#000",marginHorizontal:10}}>
+                        <View style={{borderRadius:5,flex:5,justifyContent:"center",borderWidth:1.5,borderColor:"#000",marginHorizontal:10}}>
                             <Text style={{
-                                color: '#000',
+                                color: '#777',
                                 fontSize: 25,
                                 fontFamily: 'FuturaStd-Bold',
                                 marginBottom: 20,
@@ -98,23 +98,23 @@ export default class DocZip extends Component {
                         </View>
                     </View>
                     <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:20,marginHorizontal:20}}>
-                        <View style={{flex:5,borderWidth:3,borderColor:"#000",marginHorizontal:10,justifyContent:"center",alignItems:"center"}}>
+                        <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",marginHorizontal:10,justifyContent:"center",alignItems:"center"}}>
                             <Text style={{
-                                color: '#000',
-                                fontSize: 25,
+                                color: '#777',
+                                fontSize: 24,
                                 fontFamily: 'FuturaStd-Bold',
                                 alignSelf: 'center',
                             }}>
                                 Promotions</Text>
                         </View>
-                        <View style={{flex:5,borderWidth:3,borderColor:"#000",justifyContent:'center',alignItems:'center',marginHorizontal:10}}>
+                        <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",justifyContent:'center',alignItems:'center',marginHorizontal:10}}>
                             <Text style={{
-                                color: '#000',
-                                fontSize: 40,
+                                color: '#777',
+                                fontSize: 35,
                                 fontFamily: 'FuturaStd-Bold',
                                 alignSelf: 'center',
                             }}>
-                               %OFF</Text>
+                               5% OFF</Text>
                         </View>
                     </View>
                     </View>
@@ -128,29 +128,28 @@ export default class DocZip extends Component {
                         </View>
                         <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:12}}>
                         <View style={{width:45,height:45,borderWidth:3,borderColor:"#fff",justifyContent:'center',marginHorizontal:5,alignItems:"center"}}><Text style={{color:"#fff"}}>Ae</Text></View>
-                        <Text style={{color:"#fff",marginTop:15,marginLeft:5,fontSize:14,fontFamily:'HelveticaNeueLTStd-Md'}}>Adobe After Effect</Text>
+                        <Text style={{color:"#fff",marginTop:15,marginLeft:5,fontSize:13,fontFamily:'HelveticaNeueLTStd-Md'}}>Adobe After Effect</Text>
                         <Text style={{color:"#fff",marginTop:10,marginLeft:10,fontSize:20,fontFamily:'HelveticaNeueLTStd-Md'}}>$ 5.99</Text>
-                        <View style={{marginLeft:15,width:130,height:45,marginTop:10,backgroundColor:"#fff",justifyContent:'center',alignItems:"center"}}>
+                            <View style={{marginLeft:15,width:130,height:45,marginTop:-2,backgroundColor:"#fff",justifyContent:'center',alignItems:"center",borderRadius:5}}>
                             <Text style={{fontFamily:'FuturaStd-Bold',fontSize:16}}>BUY</Text></View>
                         </View>
                         <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:20}}>
                             <View style={{width:45,height:45,borderWidth:3,borderColor:"#fff",justifyContent:'center',marginHorizontal:5,alignItems:"center"}}><Text style={{color:"#fff"}}>Ps</Text></View>
-                            <Text style={{color:"#fff",marginTop:15,marginLeft:5,fontSize:14,fontFamily:'HelveticaNeueLTStd-Md'}}>Adobe Photoshop</Text>
+                            <Text style={{color:"#fff",marginTop:15,marginLeft:5,fontSize:13,fontFamily:'HelveticaNeueLTStd-Md'}}>Adobe Photoshop</Text>
                             <Text style={{color:"#fff",marginTop:10,marginLeft:10,fontSize:20,fontFamily:'HelveticaNeueLTStd-Md'}}>$ 8.99</Text>
-                            <View style={{marginLeft:15,width:130,height:45,marginTop:10,backgroundColor:"#fff",justifyContent:'center',alignItems:"center"}}>
+                            <View style={{marginLeft:15,width:130,height:45,marginTop:-2,backgroundColor:"#fff",justifyContent:'center',alignItems:"center",borderRadius:5}}>
                                 <Text style={{fontFamily:'FuturaStd-Bold',fontSize:16}}>BUY</Text></View>
                         </View>
                         <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:20}}>
                             <View style={{width:45,height:45,borderWidth:3,borderColor:"#fff",justifyContent:'center',marginHorizontal:5,alignItems:"center"}}><Text style={{color:"#fff"}}>Ae</Text></View>
-                            <Text style={{color:"#fff",marginTop:15,marginLeft:5,fontSize:14,fontFamily:'HelveticaNeueLTStd-Md'}}>Adobe After Effect</Text>
+                            <Text style={{color:"#fff",marginTop:15,marginLeft:5,fontSize:13,fontFamily:'HelveticaNeueLTStd-Md'}}>Adobe After Effect</Text>
                             <Text style={{color:"#fff",marginTop:10,marginLeft:10,fontSize:20,fontFamily:'HelveticaNeueLTStd-Md'}}>$ 7.99</Text>
-                            <View style={{marginLeft:15,width:130,height:45,marginTop:10,backgroundColor:"#fff",justifyContent:'center',alignItems:"center"}}>
+                            <View style={{marginLeft:15,width:130,height:45,marginTop:-2,backgroundColor:"#fff",justifyContent:'center',alignItems:"center",borderRadius:5}}>
                                 <Text style={{fontFamily:'FuturaStd-Bold',fontSize:16}}>BUY</Text></View>
                         </View>
                         </View>
-
             </View>
         );
     }

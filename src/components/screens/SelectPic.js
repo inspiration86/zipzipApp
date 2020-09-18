@@ -8,8 +8,7 @@ import {
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import { Dialog } from 'react-native-simple-dialogs';
 import ImagePicker from 'react-native-image-picker';
-
-//import ImagePicker from "react-native-customized-image-picker";
+import { Divider } from 'react-native-paper';
 export default class SelectPic extends Component {
     constructor(props) {
         super(props);
@@ -73,7 +72,6 @@ export default class SelectPic extends Component {
     }
     render() {
      //   const  image = this.state;
-
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} translucent={true} networkActivityIndicatorVisible={true}
@@ -87,82 +85,66 @@ export default class SelectPic extends Component {
                     </TouchableOpacity>
                     <Image source={this.state.avatarSource} style={{width:100,height:200,justifyContent:"center",alignItems:"center",alignSelf:"center"}} />
                     <Text>{this.state.infoImage}</Text>
-                    <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('ZipSuccess')}>
-                    {/*<TouchableOpacity activeOpacity={0.92} onPress={() => this.clickEventListener()}>*/}
-                        <View style={styles.buttonStyle}>
-                            <Image
-                                style={{width: 210, height: 40}}
-                                source={require('../../../assets/images/ZipZipWhite.png')}
-                            />
-                        </View>
+                    <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('ZipSuccess')}>
+                                <Image style={{width: '55%', height: 35}}
+                                    source={require('../../../assets/images/ZipZipWhite.png')}
+                                />
                     </TouchableOpacity>
+                    </View>
                     <View>
                     </View>
-
-                    <Dialog
-                        visible={this.state.dialogVisible}
-                        dialogStyle={{backgroundColor:'#fff',width:370,height:280,justifyContent:"center",alignItems:"center",borderRightWidth:8,borderBottomWidth:4,borderLeftWidth:2,borderTopWidth:2,borderColor:"#000",}}
-                        // title="warning"
-                        onTouchOutside={() => this.setState({dialogVisible: false})} >
-                                <View style={{marginTop:-20,borderBottomWidth:3,borderBottomColor:"#000"}}>
-                                    <Image
-                                        style={{width: 330, height: 105,marginBottom:5}}
-                                        source={require('../../../assets/images/movimg.png')}
-                                    />
-                                </View>
-                                <Text style={{marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,color:"#d21404"}}>100 MB</Text>
-                                <View style={{borderWidth:3,borderColor:"#000",width:300,height:45,backgroundColor:"#d21404"}}></View>
-                    </Dialog>
-
-                    <Dialog
-                        visible={this.state.dialogVisible2}
-                        dialogStyle={{backgroundColor:'#fff',width:370,height:280,justifyContent:"center",alignItems:"center",borderRightWidth:8,borderBottomWidth:4,borderLeftWidth:2,borderTopWidth:2,borderColor:"#000",}}
-                        // title="warning"
-                        onTouchOutside={() => this.setState({dialogVisible2: false})} >
-                        <View style={{marginTop:-20,borderBottomWidth:3,borderBottomColor:"#000"}}>
-                            <Image
-                                style={{width: 330, height: 105,marginBottom:5}}
-                                source={require('../../../assets/images/movimg.png')}
-                            />
-                        </View>
-                        <View style={{flexDirection:"row"}}>
+                </ScrollView>
+                <Dialog
+                    visible={this.state.dialogVisible}
+                    dialogStyle={styles.dialog}
+                    // title="warning"
+                    onTouchOutside={() => this.setState({dialogVisible: false})} >
+                    <Image
+                        style={{width: '95%', height: 95,marginBottom:5,alignSelf:"center"}}
+                        source={require('../../../assets/images/movimg.png')}
+                    />
+                    <Divider style={styles.divider} />
+                    <Text style={{marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,color:"#d21404"}}>100 MB</Text>
+                    <View style={{borderWidth:3,borderColor:"#000",width:300,height:45,backgroundColor:"#d21404"}}></View>
+                </Dialog>
+                <Dialog
+                    visible={this.state.dialogVisible2}
+                    dialogStyle={styles.dialog}
+                    // title="warning"
+                    onTouchOutside={() => this.setState({dialogVisible2: false})} >
+                    <Image
+                        style={{width: '95%', height: 95,marginBottom:5,alignSelf:"center"}}
+                        source={require('../../../assets/images/movimg.png')}
+                    />
+                    <Divider style={styles.divider} />
+                    <View style={{flexDirection:"row"}}>
                         <Text style={{flex:2,marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18}}>25 MB</Text>
                         <Text style={{flex:1,marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,color:"#b3b3b3"}}>100 MB</Text>
+                    </View>
+                    <View style={{borderWidth:3,borderColor:"#000",width:300,height:45,flexDirection:"row"}}>
+                        <View style={{flex:2,width:40,backgroundColor:"#000"}}></View>
+                        <View style={{flex:5,width:40,backgroundColor:"#fff"}}></View>
+                    </View>
+                </Dialog>
+                <Dialog
+                    visible={this.state.dialogVisible3}
+                    dialogStyle={styles.dialog}
+                    // title="warning"
+                    onTouchOutside={() => this.setState({dialogVisible3: false})}
+                    onRequestClose={() => this.setState({dialogVisible3: false})}>
+                    <Text style={{color:"#d21404",fontFamily: 'FuturaStd-Bold',fontSize:22,alignSelf:"center",marginBottom:10}}>NOT ENOUGH STORAGE</Text>
+                    <Divider style={styles.divider} />
+                    <Text style={{fontFamily: 'HelveticaNeueLTStd-Md',fontSize:20,alignSelf:"center",textAlign:'center'}}>you should empty your storage for zipziped photos</Text>
+                    <Divider style={styles.divider} />
+                    <Text style={{fontFamily: 'FuturaStd-Bold',fontSize:22,alignSelf:"center"}}>NEW FOLDER SIZE: 25 MB</Text>
+                    <TouchableOpacity activeOpacity={0.92} onPress={() => this.setdialogVisible3(false)}>
+                        <View style={[styles.buttonStyle,{height:60,marginTop:15}]}>
+                            <Text style={styles.textButton}>
+                                Got it </Text>
                         </View>
-                        <View style={{borderWidth:3,borderColor:"#000",width:300,height:45,flexDirection:"row"}}>
-                            <View style={{flex:2,width:40,backgroundColor:"#000"}}></View>
-                            <View style={{flex:5,width:40,backgroundColor:"#fff"}}></View>
-                        </View>
-                    </Dialog>
-
-                    <Dialog
-                        visible={this.state.dialogVisible3}
-                        dialogStyle={{backgroundColor:'#fff',width:370,height:250,justifyContent:"center",alignItems:"center",borderRightWidth:8,borderBottomWidth:4,borderLeftWidth:2,borderTopWidth:2,borderColor:"#000",}}
-                        // title="warning"
-                        onTouchOutside={() => this.setState({dialogVisible3: false})} >
-                        <View style={{marginTop:-5,borderBottomWidth:3,borderBottomColor:"#000"}}>
-                            <Text style={{color:"#d21404",fontFamily: 'FuturaStd-Bold',fontSize:24,alignSelf:"center",marginBottom:10}}>NOT ENOUGH STORAGE</Text>
-                        </View>
-                        <View style={{marginTop:5,borderBottomWidth:3,borderBottomColor:"#000",padding:5}}>
-                            <Text style={{fontFamily: 'HelveticaNeueLTStd-Md',fontSize:20,alignSelf:"center",textAlign:'center'}}>you should empty your storage for zipziped photos</Text>
-                        </View>
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontFamily: 'FuturaStd-Bold',fontSize:22,alignSelf:"center"}}>NEW FOLDER SIZE: 25 MB</Text>
-                        </View>
-                        <TouchableOpacity activeOpacity={0.92} onPress={() => this.setdialogVisible3(false)}>
-                            <View style={{backgroundColor: '#000',
-                                height: 50,
-                                width: '80%',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                alignSelf: 'center',
-                                marginTop: 15,}}>
-                                <Text style={styles.textButton}>
-                                    Got it </Text>
-                            </View>
-                        </TouchableOpacity>
-                    </Dialog>
-                </ScrollView>
+                    </TouchableOpacity>
+                </Dialog>
             </View>
         );
     }
@@ -172,14 +154,21 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    buttonContainer:{
+        flex:5,
+        marginTop: 90,
+        width:'90%',
+        alignSelf:'center'
+    },
     buttonStyle: {
         backgroundColor: '#000',
-        height: 70,
-        width: '80%',
+        height: 65,
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
         marginVertical: 10,
+        borderRadius:5
     },
     textButton: {
         color: '#fff',
@@ -188,4 +177,18 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
     },
+    dialog:{
+        backgroundColor:'#fff',
+        width:370,
+        height:250,
+        justifyContent:"center",
+        alignItems:"center",
+        borderRightWidth:8,
+        borderBottomWidth:4,
+        borderLeftWidth:2,
+        borderTopWidth:2,
+        borderColor:"#000",
+    },
+    divider:{height:3,width:'95%',marginVertical: 4,backgroundColor:"#000"},
+
 });

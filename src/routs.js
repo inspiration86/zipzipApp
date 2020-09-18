@@ -1,7 +1,6 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 //global screens
-import Splash from './components/screens/Splash';
 import Home from './components/screens/Home';
 import Login from './components/screens/Login';
 import  DashboardUser from './components/layouts/DashboardUser';
@@ -19,14 +18,61 @@ import ZipSuccess from "./components/screens/ZipSuccess";
 import BuyPicZip from "./components/screens/BuyPicZip";
 import SelectPayWay from "./components/screens/SelectPayWay";
 import Help from "./components/screens/Help";
+import Store from "./components/screens/Store";
 import BuyPicZipClassicSuccess from "./components/screens/BuyPicZipClassicSuccess";
 import BuyPicZipPremiumSuccess from "./components/screens/BuyPicZipPremiumSuccess";
-import test from "./components/screens/test";
+//help
+import Faq from "./components/screens/helpScreen/Faq";
+import Extentions from "./components/screens/helpScreen/Extentions";
+import HelpClassic from "./components/screens/helpScreen/HelpClassic";
+import HelpPremium from "./components/screens/helpScreen/HelpPremium";
+import HowZip from "./components/screens/helpScreen/HowZip";
+import HelpFree from "./components/screens/helpScreen/HelpFree";
 
 const RootStack = createStackNavigator({
-        Splash: {screen: Splash,navigationOptions: ({navigation}) => ({
-            headerShown: false
-            })},
+
+        Store: {
+            screen: Store,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
+        HelpFree: {
+            screen: HelpFree,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
+        HowZip: {
+            screen: HowZip,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
+        HelpPremium: {
+            screen: HelpPremium,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
+        Extentions: {
+            screen: Extentions,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
+        HelpClassic: {
+            screen: HelpClassic,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
+        Faq: {
+            screen: Faq,
+            navigationOptions: ({navigation}) => ({
+                headerShown: false
+            })
+        },
         BuyPicZipPremiumSuccess: {
             screen: BuyPicZipPremiumSuccess,
             navigationOptions: ({navigation}) => ({
@@ -140,14 +186,9 @@ const RootStack = createStackNavigator({
                 headerShown: false
             })
         },
-        test: {
-            screen: test,
-            navigationOptions: ({navigation}) => ({
-                headerShown: false
-            })
-        },
         },
     {
+       // initialRouteName: 'DashboardUser',
        initialRouteName: 'DashboardUser',
     },
     {

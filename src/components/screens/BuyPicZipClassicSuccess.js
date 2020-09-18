@@ -3,10 +3,11 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar,TextInput
+    Image, StatusBar, Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+const {width, height} = Dimensions.get('window');
 
 export default class DocZip extends Component {
     constructor(props) {
@@ -21,51 +22,21 @@ export default class DocZip extends Component {
                            backgroundColor={'#000'}
                            barStyle="light-content" />
                 <ScrollView>
-                    <View style={{backgroundColor:'#fff',height:90,width:90,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:70,borderRadius:70,borderWidth:10,borderColor:"#000"}}>
+                    <View style={styles.circle}>
                         <Icon name='check' style={{justifyContent:"center",alignItems:"center",fontSize: 55, color: '#000',padding:5,alignSelf:"center" }} />
                     </View>
-                    <Text style={{
-                        color: '#000',
-                        fontSize: 35,
-                        marginTop:10,
-                        fontFamily: 'FuturaStd-Bold',
-                        alignSelf: 'center',
-                        marginBottom: 20,
-                    }}>
-                        Done!</Text>
-
-                    <View style={{alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:10}}>
-                        <Image
-                            style={{width: 130, height: 130}}
-                            source={require('../../../assets/images/PicZip.png')}
-                        />
-                        <Text style={{
-                            color: '#000',
-                            fontSize: 25,
-                            marginTop:10,
-                            fontFamily: 'FuturaStd-Bold',
-                            alignSelf: 'center',
-                            marginBottom: 20,
-                        }}>
-                            Classic Account Actived!</Text>
-                        <Image
-                            style={{width: 40, height: 70,marginTop:-10}}
-                            source={require('../../../assets/images/tagclassic.png')}
-                        />
-                    </View>
-                    <Text style={{
-                        color: '#000',
-                        fontSize: 18,
-                        marginTop:30,
-                        fontFamily: 'HelveticaNeueLTStd-Md',                        alignSelf: 'center',
-                        marginBottom: 10,
-                    }}>
+                    <Text style={[styles.textHeader,{fontSize:30}]}>Done!</Text>
+                        <Image style={styles.image}
+                            source={require('../../../assets/images/PicZip.png')}/>
+                        <Text style={styles.textHeader}>Classic Account Actived!</Text>
+                    <Image style={styles.tag}
+                        source={require('../../../assets/images/tagclassic.png')}/>
+                    <Text style={styles.txtBrief}>
                         Wish you the BRIGHT & BRIEF photos!</Text>
-                    <View style={{marginTop: 10,flex:10}}>
-                        <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('')}>
+                    <View style={{marginTop: 5,flex:10}}>
+                        <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPic')}>
                             <View style={styles.buttonStyle}>
-                                <Text style={styles.textButton}>
-                                    Start ZipZip </Text>
+                                <Text style={styles.textButton}>Start zipzip </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -79,6 +50,45 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    circle:{
+        backgroundColor:'#fff',
+        height:90,
+        width:90,
+        alignItems:'center',
+        justifyContent:'center',
+        alignSelf:'center',
+        marginTop:70,
+        borderRadius:70,
+        borderWidth:10,
+        borderColor:"#000"},
+    image:{
+        width: 130,
+        height: 130,
+        alignSelf:'center',
+        borderRadius:5,
+        marginTop:10
+    },
+    tag:{
+        width: 40,
+        height: 70,
+        marginTop:-10,
+        alignSelf:'center'
+    },
+    textHeader:{
+        color: '#000',
+        fontSize: width>350?22:18,
+        marginTop:10,
+        fontFamily: 'FuturaStd-Bold',
+        alignSelf: 'center',
+        textAlign:"center",
+        marginBottom: 20,
+    },
+    txtBrief:{
+        fontSize: width>350?18:16,
+        marginTop:45,
+        fontFamily: 'HelveticaNeueLTStd-Md',
+        alignSelf: 'center',
+    },
     buttonStyle: {
         backgroundColor: '#000',
         height: 60,
@@ -86,12 +96,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        marginVertical: 10,
+        marginTop: 15,
+        borderRadius:5
     },
     textButton: {
         color: '#fff',
-        fontSize: 25,
-        fontFamily: 'HelveticaNeueLTStd-Md',
+        fontSize: width>350?20:18,
+        fontFamily: 'FuturaStd-Bold',
         alignSelf: 'center',
         justifyContent: 'center',
     },

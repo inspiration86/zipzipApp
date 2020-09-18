@@ -6,19 +6,29 @@ import {
     Image,
     Text,
     ImageBackground,
-    StatusBar, Animated, StyleSheet,
+    StatusBar, Animated, StyleSheet, Dimensions,
 } from 'react-native';
+const {width, height} = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
-import {faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons/faArrowAltCircleLeft';
-import {faCashRegister, faHandHolding, faHands, faHSquare} from '@fortawesome/free-solid-svg-icons';
-import {faFileExport} from '@fortawesome/free-solid-svg-icons/faFileExport';
+//import PhoneNumberPicker from 'react-native-country-code-telephone-input'
+//import PhoneInput from 'react-native-phone-input'
 
 class NotificationLocal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+    // render(){
+    //     return(
+    //         <PhoneInput ref='phone'/>
+    //     )
+    // }
+
+
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1,backgroundColor:"#fff"}}>
                 <View style={styles.box}>
                     <View style={{marginTop: 10, justifyContent: 'center', alignItems: 'center'}}>
                         <Icon
@@ -30,15 +40,12 @@ class NotificationLocal extends Component {
                         <Text></Text>
                     </View>
                     <View style={styles.boxSafe}>
-                        <Text style={styles.textSafe}>SAFE TECHNOLOGY</Text>
+                        <Text style={styles.textSafe}>SAFE  TECHNOLOGY</Text>
                     </View>
                     <View style={styles.linhorz}>
                         <Text style={styles.textLocal}>LOCAL PROCESS</Text>
                         <Text style={styles.text}>
-                            All<Text style={{
-                            fontFamily: 'Frutiger LT 95 Ultra Black',
-                            fontSize: 20,
-                        }}> ZIPZIP</Text> compression
+                            All ZIPZIP compression
                             algorithms have been performed
                             on this mobile phone during the
                             internal process, and no information
@@ -46,41 +53,58 @@ class NotificationLocal extends Component {
                             the action.
                         </Text>
                     </View>
-                    <TouchableOpacity style={styles.button} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('Login')}>
-                        <View style={styles.button}>
-                            <Text style={{color: '#fff', fontSize: 25, fontFamily: 'futura-pt-medium-589e45b956de4'}}>GOT
-                                it</Text>
-                        </View>
+                    <TouchableOpacity style={styles.button} activeOpacity={0.92}
+                                      onPress={() => this.props.navigation.navigate('Login')}>
+                        <Text style={{
+                            color: '#fff',
+                            fontSize: width * 0.06,
+                            fontFamily: 'futura-pt-medium-589e45b956de4',
+                        }}>GOT it</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{marginBottom: 25, justifyContent: 'center',alignItems: 'center', flex: 2}}>
-                    <Text style={{color: '#b3b3b3', fontSize: 18, fontFamily: 'futura-pt-medium-589e45b956de4'}}>Designed
+                <View style={styles.info}>
+                    <Text style={{
+                        color: '#b4b4b4',
+                        fontSize: width * 0.04,
+                        fontFamily: 'futura-pt-medium-589e45b956de4',
+                    }}>Designed
                         and Executed by <Text style={styles.company}>ARKA Invent co.</Text></Text>
                 </View>
+
+
             </View>
         );
     }
 }
+
 const styles = StyleSheet.create({
+    info: {
+        position: 'absolute',
+        top: '90%',
+        alignSelf: 'center',
+    },
     company: {
         marginTop: 5,
-        fontSize: 18,
+        fontSize: width * 0.04,
         color: '#b4b4b4',
         fontFamily: 'FuturaStd-Bold',
     },
-    box:{
-        flex: 50,
-        marginVertical: 150,
+    box: {
+        marginTop:70,
+        height:height*0.6-10,
         borderTopWidth: 3,
         borderLeftWidth: 3,
         borderRightWidth: 3,
         borderBottomWidth: 25,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
         borderColor: '#000',
-        margin: 20,
+        marginHorizontal: 20,
+        borderTopLeftRadius:5,
+        borderTopRightRadius:5,
+
     },
-    line:{
+    line: {
         marginHorizontal: 180,
         marginTop: -5,
         justifyContent: 'center',
@@ -88,8 +112,8 @@ const styles = StyleSheet.create({
         borderLeftWidth: 3,
         borderLeftColor: '#000',
     },
-    boxSafe:{
-
+    boxSafe: {
+        borderRadius:4,
         borderTopWidth: 2,
         borderLeftWidth: 2,
         borderRightWidth: 2,
@@ -97,56 +121,47 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         backgroundColor: '#000',
     },
-    textSafe:{
+    textSafe: {
         alignSelf: 'center',
         fontFamily: 'futura-pt-bold-589e44b6aacd3',
         padding: 5,
-        fontSize: 18,
+        fontSize: width * 0.04,
         color: '#fff',
     },
-    linhorz:{
+    linhorz: {
         borderTopWidth: 3,
         borderTopColor: '#000',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
     },
-    textLocal:{
+    textLocal: {
         alignSelf: 'center',
         fontFamily: 'futura-pt-bold-589e44b6aacd3',
         padding: 5,
-        fontSize: 16,
+        fontSize: width * 0.04,
         borderBottomWidth: 3,
         borderBottomColor: '#000',
 
-      //  textDecoration: "underline"
+        //  textDecoration: "underline"
     },
-    text:{
+    text: {
         marginTop: 10,
         alignSelf: 'center',
-        fontSize: 18,
-        textAlign:"center",
+        fontSize: width * 0.05,
+        textAlign: 'center',
         fontFamily: 'futura-pt-bold-589e44b6aacd3',
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
     },
     button: {
-        width: 330,
-        height: 45,
+        width: '90%',
+        height: 50,
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 30,
+        marginTop: 16,
         marginHorizontal: 15,
-        // shadowColor: '#474747',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 6,
-        // },
-        // shadowOpacity: 0.37,
-        // shadowRadius: 7.49,
-        // elevation: 12,
+        borderRadius:5,
     },
 });
-
 export default NotificationLocal;

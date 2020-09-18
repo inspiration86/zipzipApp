@@ -3,9 +3,9 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar,TextInput
+    Image,
+    StatusBar
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 export default class DocZip extends Component {
     constructor(props) {
@@ -15,57 +15,33 @@ export default class DocZip extends Component {
     }
     render() {
         return (
-
-
                     <View style={styles.container}>
                         <StatusBar hidden={true} translucent={true} networkActivityIndicatorVisible={true}
                                    backgroundColor={'#000'}
                                    barStyle="light-content" />
                     <ScrollView>
-                        <View style={{alignItems:'center',justifyContent:'center',marginTop:20}}>
-                            <Text style={{color:"#000",   fontSize: 25,
-                                fontFamily: 'FuturaStd-Bold',}}>
-                                Classic account </Text>
-                        </View>
-                        <View style={{backgroundColor:'#fff',height:130,width:130,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:30}}>
-                            <Image
-                                style={{width: 150, height: 180}}
-                                source={require('../../../assets/images/classic.png')}
-                            />
-                        </View>
-                        <View style={{alignItems:'center',justifyContent:'center',marginTop:30}}>
-                            <Text style={{color:"#000",   fontSize: 25,
-                                fontFamily: 'FuturaStd-Bold',}}>
-                                $ 5.99</Text>
-                        </View>
-                        <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPayWay')}>
-                            <View style={styles.buttonStyle}>
-                                <Text style={styles.textButton}>
-                                    BUY </Text>
-                            </View>
+                        <View style={styles.accountContainer}>
+                            <Text style={styles.text}>Classic account</Text>
+                            <Image style={{width: 140, height: 170,alignSelf:'center',marginTop:5}}
+                                source={require('../../../assets/images/classic.png')}/>
+                            <Text style={styles.text}>$ 5.99</Text>
+                        <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPayWay')}>
+                                <Text style={styles.textButton}>BUY</Text>
                         </TouchableOpacity>
-                        <View style={{alignItems:'center',justifyContent:'center',marginTop:10}}>
-                            <Text style={{color:"#000",   fontSize: 25,
-                                fontFamily: 'FuturaStd-Bold',}}>
-                                Premium account </Text>
                         </View>
-                        <View style={{backgroundColor:'#fff',height:130,width:130,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:30}}>
-                            <Image
-                                style={{width: 150, height: 190}}
-                                source={require('../../../assets/images/premium.png')}
-                            />
                         </View>
-                        <View style={{alignItems:'center',justifyContent:'center',marginTop:30}}>
-                            <Text style={{color:"#000",   fontSize: 25,
-                                fontFamily: 'FuturaStd-Bold',}}>
-                                $ 9.99</Text>
-                        </View>
-                        <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPayWay')}>
-                        <View style={styles.buttonStyle}>
-                            <Text style={styles.textButton}>
-                                BUY </Text>
-                        </View>
+                        <View style={styles.accountContainer}>
+                            <Text style={styles.text}>Premium account</Text>
+                        <Image style={{width: 150, height: 180,alignSelf:'center',marginTop:5}}
+                            source={require('../../../assets/images/premium.png')}/>
+                            <Text style={styles.text}>$ 9.99</Text>
+                        <View style={styles.buttonContainer}>
+                        <TouchableOpacity  style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPayWay')}>
+                            <Text style={styles.textButton}>BUY</Text>
                         </TouchableOpacity>
+                        </View>
+                        </View>
                     </ScrollView>
             </View>
         );
@@ -76,14 +52,31 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    accountContainer:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop:10
+    },
+    text:{
+        color:"#000",
+        fontSize: 25,
+        fontFamily: 'FuturaStd-Bold',
+        textAlign:"center",
+        marginTop:5
+    },
+    buttonContainer:{
+        width:'90%',
+        alignSelf:'center'
+    },
     buttonStyle: {
         backgroundColor: '#000',
-        height: 60,
-        width: '80%',
+        height: 55,
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
         marginTop: 15,
+        borderRadius:5
     },
     textButton: {
         color: '#fff',

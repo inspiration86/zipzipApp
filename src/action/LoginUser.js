@@ -1,23 +1,23 @@
 import {
     MOBILE_CHANGED,
-    PASSWORD_CHANGED,
     USER_LOGIN_ATTEMP,
     USER_LOGIN_FAIL,
-    USER_LOGIN_SUCCESS,USER_GET_DATA,USER_RESET_PASSWORD_SUCCESS
+    USER_LOGIN_SUCCESS,USER_GET_DATA,TOKEN_CHANGED
 } from './TypeLoginUser';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import React from 'react';
 import {NavigationActions} from 'react-navigation';
 import {Alert, View} from "react-native";
+import {storeData} from '../storage';
 export const mobileChanged = (text) => {
     return {
         type: MOBILE_CHANGED,
         payload: text
     }
 }
-export const passwordChanged = (text) => {
+export const tokenChanged = (text) => {
     return {
-        type: PASSWORD_CHANGED,
+        type: TOKEN_CHANGED,
         payload: text
     }
 }
@@ -27,79 +27,42 @@ export const userGetData = (text) => {
         payload: text
     }
 }
-export const loginUser = ({mobile, password, navigation}) => {
+export const loginUser = ({mobile, navigation}) => {
     return (dispatch) => {
 
         dispatch({type: USER_LOGIN_ATTEMP})
-        fetch('http://194.5.175.25:2000/api/v1/login', {
+        fetch('http://194.5.175.25:4000/api/v1/auth', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                mobile: mobile,
-                password: password,
+                mobile: mobile
             }),
         }).then((response) => response.json()).then((responseJson) => {
 
             if (responseJson.success === true) {
-               userGetData('sddsd')
+                 storeData("USER_MOBILE", responseJson.data['mobile']);
+                 storeData("USER_ID", responseJson.data['id']);
                 loginSellerSuccess(dispatch, navigation,responseJson.data);
             } else {
 
                 loginSellerFail(dispatch,responseJson.data);
             }
         }).catch((error) => {
-            console.error(error);
+
         });
     }
-
 }
-export const resetPasswordUser = ({mobile ,navigation}) => {
-    return (dispatch) => {
 
-        // dispatch({type: USER_LOGIN_ATTEMP})
-        fetch('http://194.5.175.25:2000/api/v1/resetpassword', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                mobile: mobile,
-
-            }),
-        }).then((response) => response.json()).then((responseJson) => {
-
-            if (responseJson.success === true) {
-                resetPasswordSuccess(dispatch, navigation);
-            } else {
-
-                Alert.alert('',responseJson.data,[{text:'بله'}]);
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
-
-}
-const resetPasswordSuccess = (dispatch, navigation) => {
-
-    const NavigationAction = NavigationActions.navigate({routeName: 'Login', params: {},})
-    navigation.dispatch(NavigationAction);
-
-}
 const loginSellerSuccess = (dispatch, navigation,data) => {
-
     dispatch({type: USER_LOGIN_SUCCESS,payload:data});
     const NavigationAction = NavigationActions.navigate({routeName: 'DashboardUser', params: {},})
     navigation.dispatch(NavigationAction);
-
 }
 const loginSellerFail = (dispatch,error) => {
     dispatch({type: USER_LOGIN_FAIL,payload:error});
-
 }
 export const message=()=>{
     return(<View><AwesomeAlert

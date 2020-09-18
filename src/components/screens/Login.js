@@ -3,12 +3,12 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar,
+    Image, StatusBar, Dimensions,
 } from 'react-native';
+const {width, height} = Dimensions.get('window');
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
-//import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
-
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -23,18 +23,11 @@ export default class App extends Component {
                            backgroundColor={'#000'}
                            barStyle="light-content" />
                 <ScrollView>
-                    <View style={{
-                        flex:3,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: 80,
-                    }}>
-                        <Image
-                            style={{width: '80%', height: 65}}
-                            source={require('../../../assets/images/ZipZip.png')}
-                        />
-                    </View>
-                    <View style={{marginTop: 115,flex:10}}>
+                    <Image
+                        style={{flex:1,width: '80%', height: 65,marginTop: 90,alignSelf:"center"}}
+                        source={require('../../../assets/images/ZipZip.png')}
+                    />
+                    <View style={styles.buttonContainer}>
                         <Text style={{
                             color: '#000',
                             fontSize: 20,
@@ -45,7 +38,8 @@ export default class App extends Component {
                             Login With </Text>
                         <TouchableOpacity  activeOpacity={0.92} onPress={() => this.props.navigation.navigate('RegisterMobile')}>
                             <View style={styles.buttonStyle}>
-                                <Text style={styles.textButton}>
+                                <Text adjustsFontSizeToFit
+                                    style={styles.textButton}>
                                     Mobile Number
                                 </Text>
                             </View>
@@ -72,6 +66,11 @@ export default class App extends Component {
                         style={{flex:1,marginTop:200,  justifyContent: 'center',
                         alignItems: 'center',position:"relative"}}
                     >
+                    {/*<View*/}
+                    {/*    style={{flex:1,*/}
+                    {/*        // position: 'absolute',*/}
+                    {/*        // top: height-300,*/}
+                    {/*        alignSelf: 'center',}}>*/}
                         <Icon
                             name='minus'
                             color='#000'
@@ -85,15 +84,23 @@ export default class App extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:"#fff"
+    },
+    buttonContainer:{
+        flex:8,
+        marginTop: 90,
+        width:'90%',
+        alignSelf:'center'
     },
     buttonStyle: {
         backgroundColor: '#000',
         height: 60,
-        width: '80%',
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
         marginVertical: 10,
+        borderRadius:5,
     },
     textButton: {
         color: '#fff',

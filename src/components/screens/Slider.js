@@ -1,41 +1,46 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, BackHandler, Animated} from 'react-native';
+import {StyleSheet, View, Text,Easing,BackHandler, Animated} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import DashboardUser from '../layouts/DashboardUser';
-//import Login from './Login'
-
+import Video from 'react-native-video';
 const slides = [
     {
-        key: 'one',
-        title:' صفحه اصلي',
-        text: 'با اپ چرتکه به راحتي هزينه هاي خود را مديريت کنيد',
-        image: require('../../../assets/images/slide1.gif'),
-        bg: "#fff"
+        key:1,
+        Video: require('../../../assets/video/Slide1.mp4'),
     },
     {
-        key: 'two',
-        title:'صفحه گزارشگيري',
-        text: 'مي توانيد به روش هاي مختلف گزارشگيري کنيد',
-        image: require('../../../assets/images/slide2.gif'),
-        bg: "#fff"
+        key: 2,
+        Video: require('../../../assets/video/Slide2.mp4'),
     },
     {
-        key: 'three',
-        title:' داشبرد اپ چرتکه',
-        text: "در اين بخش امکانات مختلفي در اختيار شماس",
-        image: require('../../../assets/images/slide3.gif'),
-        bg: "#fff"
+        key:3,
+        Video: require('../../../assets/video/Slide3.mp4'),
     },
 ];
-
 export default class Slider extends React.Component {
     constructor(props) {
         super(props);
+        this.animatedValue1 = new Animated.Value(0);
     }
     state = {
         showRealApp: false,
-
     }
+    animate() {
+        this.animatedValue1.setValue(0);
+        const createAnimation = (value, duration, easing, delay = 15000) => {
+            return Animated.timing(value, {
+                toValue: 1,
+                duration,
+                easing,
+                delay,
+                useNativeDriver:false
+            });
+        };
+        Animated.sequence([
+            createAnimation(this.animatedValue1, 900, Easing.ease),
+
+        ]).start();
+    }
+
     splash() {
         setTimeout(() => {
             // AsyncStorage.getItem(this.state.user_id,(err,result)=>{
@@ -44,9 +49,10 @@ export default class Slider extends React.Component {
             // else
             //     this.props.navigation.navigate('DashboardUser');
             //         });
-        }, 40000);
+        }, 20000);
     }
     componentDidMount() {
+        this.animate();
         this.splash();
         BackHandler.addEventListener("hardwareBackPress", this.backPressed);
     }
@@ -64,40 +70,42 @@ export default class Slider extends React.Component {
     };
     _renderItem = ({ item }) => {
         return (
-            <View
-                style={[
-                    styles.slide,
-                    {
-                        backgroundColor: item.bg,
-                    },
-                ]}>
-
-                <Image source={item.image} style={styles.image} />
-                {/*<Text style={styles.title}>{item.title}</Text>*/}
-                {/*<View style={{}}>*/}
-                {/*    <Text style={styles.text}>{item.text}</Text>*/}
-                {/*</View>*/}
-
-            </View>
+                <Video source={item.Video}
+                       ref={(ref) => {
+                           this.player = ref
+                       }}
+                       onBuffer={this.onBuffer}
+                    //  onError={this.videoError}
+                       style={styles.backgroundVideo} />
         );
     }
     _onDone = () => {
-        // User finished the introduction. Show real app through
-        // navigation or simply by controlling state
         this.setState({ showRealApp: true });
     }
     _keyExtractor = (item) => item.title;
     _renderDoneButton = () => {
+        const scale = this.animatedValue1.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.1, 1],
+        });
+        const opacity = this.animatedValue1.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+        });
+        const introtext = this.animatedValue1.interpolate({
+            inputRange: [0, 1],
+            outputRange: [-200, 50],
+        });
         return (
-            <Animated.View >
-            <View style={styles.button}>
-                <Text style={{color:"#fff",fontSize:30,fontFamily:"HelveticaNeueLTStd-Md"}}>start</Text>
+            <Animated.View style={{bottom: introtext}}>
+                <View style={styles.button}>
+                <Text style={{color:"#fff",fontSize:25,fontFamily:"HelveticaNeueLTStd-Md"}}>Start</Text>
             </View>
             </Animated.View>
         );
     };
-
     render() {
+
         if (this.state.showRealApp) {
             return <Login />;
         } else {
@@ -125,38 +133,26 @@ export default class Slider extends React.Component {
         }
     }
 }
-
 const styles = StyleSheet.create({
-    slide: {
+    container: {
         flex: 1,
-        backgroundColor:"#fff",
     },
-    image: {
-        width: '100%',
-        height:'100%',
-        borderRadius:20,
-        alignSelf:'center',
-
-    },
-    text: {
-        color: '#555',
-        textAlign: 'center',
-        fontSize: 20,
-
-    },
-    title: {
-        fontSize: 22,
-        color: '#555',
-        textAlign: 'center',
+    backgroundVideo: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
     },
     button: {
-        width: 350,
+        width: 300,
         height:60,
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:-60,
-        marginLeft:40,
-        marginHorizontal:10
+        marginTop:-20,
+        marginRight:'10%',
+        marginHorizontal:10,
+        borderRadius:5
     },
 });
