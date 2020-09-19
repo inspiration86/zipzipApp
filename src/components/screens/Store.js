@@ -8,6 +8,10 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import {Divider} from 'react-native-paper';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faHome, faTag} from '@fortawesome/free-solid-svg-icons';
+import {faPaperclip} from '@fortawesome/free-solid-svg-icons/faPaperclip';
+import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 
 export default class DocZip extends Component {
     constructor(props) {
@@ -42,12 +46,6 @@ export default class DocZip extends Component {
                             color='#000'
                             size={60}/>
                     </View>
-                    {/*<View style={{alignItems:'center',justifyContent:'center',marginTop:-20}}>*/}
-                    {/*    <Image*/}
-                    {/*        style={{width: 160, height: 60}}*/}
-                    {/*        source={require('../../../assets/images/store.png')}*/}
-                    {/*    />*/}
-                    {/*</View>*/}
                     <Text style={{
                         color: '#000',
                         fontSize: 25,
@@ -57,12 +55,6 @@ export default class DocZip extends Component {
                         marginBottom: 20,
                     }}>
                        Store</Text>
-                    {/*<Image*/}
-
-                    {/*    style={{width: 150, height: 150,tintColor:"#777"}}*/}
-                    {/*    source={require('../../../assets/images/200mfree.png')}*/}
-                    {/*/>*/}
-
                     <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:5,marginHorizontal:20,resizeMode:"contain",}}>
                     <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",marginHorizontal:10,justifyContent:"center",alignItems:"center"}}>
                         <Text style={{
@@ -81,17 +73,18 @@ export default class DocZip extends Component {
                             textAlign:'center'
                         }}>
                             Classic/Premium Account</Text>
-                            {/*<Icon*/}
-                            {/*    name='shopping-bag'*/}
-                            {/*    color='#000'*/}
-                            {/*    size={60}/>*/}
+
                     </View>
-                        <View style={{borderRadius:5,flex:5,justifyContent:"center",borderWidth:1.5,borderColor:"#000",marginHorizontal:10}}>
+                        <View style={{paddingHorizontal:5,borderRadius:5,flex:5,justifyContent:"center",borderWidth:1.5,borderColor:"#000",marginHorizontal:10}}>
+                            <Icon
+                                name='lock'
+                                color='#777'
+                                size={42} style={{alignSelf:"center"}}/>
                             <Text style={{
                                 color: '#777',
-                                fontSize: 25,
+                                fontSize: 22,
+                                marginTop:-5,
                                 fontFamily: 'FuturaStd-Bold',
-                                marginBottom: 20,
                                 textAlign:'center'
                             }}>
                                 NEW Aailable Extentions</Text>
@@ -99,20 +92,24 @@ export default class DocZip extends Component {
                     </View>
                     <View style={{flexDirection:"row",flex:1,justifyContent:'center',alignSelf:'center',marginTop:20,marginHorizontal:20}}>
                         <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",marginHorizontal:10,justifyContent:"center",alignItems:"center"}}>
+                            <FontAwesomeIcon icon={faEnvelopeOpenText} size={72} style={{color: '#000',marginTop:5,marginLeft:10}}/>
                             <Text style={{
-                                color: '#777',
+                                color: '#000',
                                 fontSize: 24,
                                 fontFamily: 'FuturaStd-Bold',
                                 alignSelf: 'center',
                             }}>
                                 Promotions</Text>
                         </View>
-                        <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",justifyContent:'center',alignItems:'center',marginHorizontal:10}}>
+                        <View style={{borderRadius:5,flex:5,borderWidth:1.5,borderColor:"#000",marginHorizontal:10}}>
+                            <Icon
+                                name='envelope'
+                                color='#777'
+                                size={72} style={{alignSelf:"center",marginBottom:5}}/>
                             <Text style={{
                                 color: '#777',
-                                fontSize: 35,
-                                fontFamily: 'FuturaStd-Bold',
-                                alignSelf: 'center',
+                                fontSize: 28,
+                                fontFamily: 'FuturaStd-Bold',marginTop:-10,textAlign:"center"
                             }}>
                                5% OFF</Text>
                         </View>
