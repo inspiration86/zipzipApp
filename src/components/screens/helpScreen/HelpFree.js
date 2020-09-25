@@ -23,7 +23,7 @@ export default class HelpFree extends Component {
                            barStyle="light-content"/>
                 <ScrollView>
                     <View style={{marginLeft:10,marginTop:10}}>
-                        <Icon
+                        <Icon onPress={()=>{this.props.navigation.goBack()}}
                             name='arrow-left'
                             color='#000'
                             size={25}  style={{marginLeft:10}}/>

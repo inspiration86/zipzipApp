@@ -21,29 +21,30 @@ export default class HowZip extends Component {
                            barStyle="light-content"/>
                 <ScrollView>
                     <View style={{marginLeft:10,marginTop:10}}>
-                        <Icon
+                        <Icon onPress={()=>{this.props.navigation.goBack()}}
                             name='arrow-left'
                             color='#000'
                             size={25}  style={{marginLeft:10}}/>
                     </View>
                         <View style={{backgroundColor:'#fff',justifyContent:"center",alignItems:"center",marginTop:10}}>
-                            <View style={{marginTop:-5}}>
                                 <Image
                                     style={{width: 70, height: 70,marginBottom:5}}
                                     source={require('../../../../assets/images/resize.png')}
                                 />
-                            </View>
+
                             <Text style={{marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,textAlign:"center"}}>How Can I ZipZip My Photos?</Text>
                             <View style={{marginTop:5,width:50,height:50,borderRadius:60,backgroundColor:"#000",justifyContent:"center",alignItems:"center"}}><Text style={{color:"#fff",fontSize:20,fontFamily: 'FuturaStd-Bold'}}>1</Text></View>
-                            <Text style={{marginTop:20,padding:2,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:18,textAlign:"center",marginHorizontal:10}}>You Should just select the photos you want until they reach 500MB in classic Account and 2GB in Premium Account and tap zipzip. </Text>
-                            <View style={{marginTop:5}}>
+                            <View style={{marginHorizontal:20}}>
+                            <Text style={{marginTop:20,padding:2,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:18,marginHorizontal:10,textAlign:"justify"}}>You Should just select the photos you want until they reach 500MB in classic Account and 2GB in Premium Account and tap zipzip. </Text>
+                            </View>
                                 <Image
-                                    style={{width: 120, height: 120,marginBottom:5}}
+                                    style={{width: 120, height: 120,marginBottom:5,marginTop:5}}
                                     source={require('../../../../assets/images/select.png')}
                                 />
-                            </View>
+                            <View style={{marginHorizontal:20}}>
                             <Text style={{marginTop:20,padding:2,fontFamily: 'FuturaStd-Bold',color:"#777",fontSize:14,textAlign:"center",marginHorizontal:10}}>You can check the size you select at the moment. </Text>
                             <Text style={{marginTop:20,padding:2,fontFamily: 'FuturaStd-Bold',fontSize:20,textAlign:"center",marginHorizontal:10}}>SELECTED PHOTOS: 100MB </Text>
+                            </View>
                             <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('ZipSuccess')}>
                                 <View style={styles.buttonStyle}>
                                     <Image
@@ -53,7 +54,9 @@ export default class HowZip extends Component {
                                 </View>
                             </TouchableOpacity>
                             <View style={{marginTop:5,width:50,height:50,borderRadius:60,backgroundColor:"#000",justifyContent:"center",alignItems:"center"}}><Text style={{color:"#fff",fontSize:20,fontFamily: 'FuturaStd-Bold'}}>2</Text></View>
-                            <Text style={{marginTop:20,padding:2,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:18,textAlign:"center",marginHorizontal:10}}>Then you can find your zipziped photos in the address you got in the notification. </Text>
+                            <View style={{marginHorizontal:20}}>
+                            <Text style={{marginTop:20,padding:2,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:18,textAlign:"justify",marginHorizontal:10}}>Then you can find your zipziped photos in the address you got in the notification. </Text>
+                            </View>
                             <Text style={{marginTop:20,padding:2,fontFamily: 'FuturaStd-Bold',fontSize:14,textAlign:"center",marginHorizontal:10}}>in a new folder named piczip/zipzip.</Text>
                             <View style={{marginTop:5}}>
                                 <Image

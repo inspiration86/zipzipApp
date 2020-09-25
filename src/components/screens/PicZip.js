@@ -59,10 +59,12 @@ const styles = StyleSheet.create({
         alignSelf:"center"
     },
     buttonContainer:{
-        flex:5,
+        flex:6,
         marginTop: 50,
         width:'90%',
-        alignSelf:'center'
+        alignSelf:'center',
+        marginBottom:5,
+
     },
     buttonStyle: {
         backgroundColor: '#000',
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         marginVertical: 10,
-        borderRadius:5
+        borderRadius:5,
     },
     textButton: {
         color: '#fff',

@@ -188,8 +188,8 @@ const RootStack = createStackNavigator({
         },
         },
     {
-       // initialRouteName: 'DashboardUser',
        initialRouteName: 'DashboardUser',
+     //  initialRouteName: 'Slider',
     },
     {
         defaultNavigationOptions: {headerShown: false}

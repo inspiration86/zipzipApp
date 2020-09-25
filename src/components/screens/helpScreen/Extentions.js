@@ -23,7 +23,7 @@ export default class Extentions extends Component {
                            backgroundColor={'#000'}
                            barStyle="light-content"/>
                 <View style={{marginLeft:10,marginTop:10}}>
-                    <Icon
+                    <Icon onPress={()=>{this.props.navigation.goBack()}}
                         name='arrow-left'
                         color='#000'
                         size={25}  style={{marginLeft:10}}/>

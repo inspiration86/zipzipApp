@@ -23,7 +23,7 @@ export default class PicZip extends Component {
                            barStyle="light-content" />
                 <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
                     <View style={{flexDirection:'row',marginLeft:'3%'}}>
-                        <Icon
+                        <Icon onPress={()=>{this.props.navigation.goBack()}}
                             name='arrow-left'
                             color='#000'
                             size={25}  style={{marginLeft:10}}/>
@@ -106,7 +106,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         marginVertical: 10,
-        borderRadius:5
+        borderRadius:5,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+            marginRight: 16,
+            marginBottom: 12,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 10,
+        shadowColor: '#000',
     },
     textButton: {
         color: '#fff',

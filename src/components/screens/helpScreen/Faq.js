@@ -23,7 +23,7 @@ export default class Faq extends Component {
                            barStyle="light-content"/>
                 <ScrollView>
                     <View style={{marginLeft:10,marginTop:10}}>
-                        <Icon
+                        <Icon onPress={()=>{this.props.navigation.goBack()}}
                             name='arrow-left'
                             color='#000'
                             size={25}  style={{marginLeft:10}}/>
@@ -39,8 +39,10 @@ export default class Faq extends Component {
                                 size={30} style={{marginLeft:15}} />
                             <Text style={styles.question}>Can I undo ZiPZiP?</Text>
                         </View>
+                        <View style={styles.replyContainer}>
                         <Text style={styles.reply}>No. You cannot reach the original size of a
                             ZiPZiPED photo after the process.</Text>
+                        </View>
                         <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",marginTop:5}}>
                             <Icon
@@ -50,8 +52,10 @@ export default class Faq extends Component {
                             <Text style={styles.question}>Can I use ZiPZiP application
                                 without Internet connection?</Text>
                         </View>
+                        <View style={styles.replyContainer}>
                         <Text style={styles.reply}>Yes. Definitely you are. Classic and premium accounts owners have offline access to the application services.
                             Can I use ZiPZiPED photos for </Text>
+                        </View>
                         <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",marginTop:5}}>
                             <Icon
@@ -60,8 +64,10 @@ export default class Faq extends Component {
                                 size={30} style={{marginLeft:15}} />
                             <Text style={styles.question}>printing or something like that?</Text>
                         </View>
+                        <View style={styles.replyContainer}>
                         <Text style={styles.reply}>Yes. Sure you can. Because the dimension of your photos will remain  %100 unchanged.You would be able to print the 13x18 cm photo after ZiPZiP and have the exact quality in comparison of the original version print in the same size.</Text>
-                        <Divider style={styles.divider} />
+                        </View>
+                            <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",marginTop:5}}>
                             <Icon
                                 name='question-circle'
@@ -69,8 +75,10 @@ export default class Faq extends Component {
                                 size={30} style={{marginLeft:15}} />
                             <Text style={styles.question}>Can I edit the ZiPZiPED photos?</Text>
                         </View>
+                        <View style={styles.replyContainer}>
                         <Text style={styles.reply}>Yes, for sure. You would be able to edit your ZiPZiPED photos exactly the old same way in photo edit software or applications.</Text>
-                        <Divider style={styles.divider} />
+                        </View>
+                            <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",marginTop:5}}>
                             <Icon
                                 name='question-circle'
@@ -79,12 +87,14 @@ export default class Faq extends Component {
                             <Text style={styles.question}>How much file  I can ZiPZiP in
                                 a day?</Text>
                         </View>
+                        <View style={styles.replyContainer}>
                         <Text style={styles.reply}>First you can ZiPZiP 100 MB of your photos for free to see the result of
                             application’s intelligent compression technology.
                             If you have a Classic Account you can
                             ZiPZiP 500 MB of your photos each day.
                             If you have a Premium Account you can compress 2 GB fo your photos each day.</Text>
-                        <Divider style={styles.divider} />
+                        </View>
+                            <Divider style={styles.divider} />
                         <View style={{flexDirection:"row",marginTop:5}}>
                             <Icon
                                 name='question-circle'
@@ -93,7 +103,8 @@ export default class Faq extends Component {
                             <Text style={styles.question}>Which file extensions ZiPZiP
                                 support?</Text>
                         </View>
-                        <View style={{marginTop:10,flexDirection:"row",flex:1,marginHorizontal:10}}>
+
+                        <View style={{marginTop:10,flexDirection:"row",marginHorizontal:10}}>
                             <Image
                                 style={{width: 50, height: 50,borderRadius:5}}
                                 source={require('../../../../assets/images/PicZip.png')}
@@ -101,7 +112,7 @@ export default class Faq extends Component {
                             <Text style={styles.reply}>JPG    PNG   TIF   JP2   BMP
                                 JPG   PNG</Text>
                         </View>
-                        <View style={{marginTop:10,flexDirection:"row",flex:1,marginHorizontal:10}}>
+                        <View style={{marginTop:10,flexDirection:"row",marginHorizontal:10}}>
                             <Image
                                 style={{width: 50, height: 50,borderRadius:5}}
                                 source={require('../../../../assets/images/MovZip.png')}
@@ -109,7 +120,7 @@ export default class Faq extends Component {
                             <Text style={styles.reply}>JPG    PNG   TIF   JP2   BMP
                                 JPG   PNG </Text>
                         </View>
-                        <View style={{marginTop:10,flexDirection:"row",flex:1,marginHorizontal:10}}>
+                        <View style={{marginTop:10,flexDirection:"row",marginHorizontal:10}}>
                             <Image
                                 style={{width: 50, height: 50,borderRadius:5}}
                                 source={require('../../../../assets/images/DocZip.png')}
@@ -129,7 +140,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor:'#fff',
-        marginHorizontal:10
     },
     divider:{height:2,width:'80%',marginVertical: 5,backgroundColor:"#000"},
     question:{
@@ -138,12 +148,15 @@ const styles = StyleSheet.create({
         marginHorizontal:10,
         flex: 2,
     },
+    replyContainer:{
+        marginHorizontal:20,
+    },
     reply:{
         marginTop:10,
         marginBottom:5,
         fontFamily: 'HelveticaNeueLTStd-Md',
         fontSize:16,
-        textAlign:"center",
+        textAlign:"justify",
         marginHorizontal:10,
     },
 });

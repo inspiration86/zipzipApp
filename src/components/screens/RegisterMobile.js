@@ -3,173 +3,192 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar, TextInput, Dimensions,
+    TextInput,
+    TouchableOpacity,
+    Image,ScrollView,
+    StatusBar, ActivityIndicator, Dimensions,
 } from 'react-native';
-const {width, height} = Dimensions.get('window');
-import {Button} from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+
+const {width, height} = Dimensions.get('window');
 import {connect} from 'react-redux';
 import {
     mobileChanged,
-    passwordChanged, tokenChanged,
-    loginUser, failMessageChanged,
-} from '../../action/LoginUser';
-import {storeData} from '../../storage';
-import {USER_MOBILE, USER_ID} from '../../types';
-import {Dialog} from "react-native-simple-dialogs";
+    registerUser,
+} from '../../action/RegisterUser';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import CountryPicker from 'react-native-country-picker-modal';
-export default class RegisterMobile extends Component {
+
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
             mobile: '',
+            password: '',
+            showAlert: false,
+            showAlert2: false,
             messageError: '',
-            Error: '',
-            dialogVisibleErr:false,
-            dialogVisible:false,
+            messageError2: '',
             token: '',
             cca2: 'US',
             country:"",
             code:"1",
         };
     }
-    /*
-    _storeData = async () => {
-        try {
-            await AsyncStorage.setItem(
-                'token',
-                this.state.token,
-            );
-        } catch (error) {
-            // Error saving data
+
+    // onMobileChange(text) {
+    //     this.props.mobileChanged(text);
+    // }
+    //
+    // onRegisterUser() {
+    //     const {mobile} = this.props;
+    //     const {navigation} = this.props;
+    //     if ((mobile.length < 1)) {
+    //         this.setState({messageError: 'Please Enter Mobile Number'});
+    //         this.showAlert2();
+    //     } else if (mobile.length < 11) {
+    //         this.setState({messageError: 'Enter the mobile number completely'});
+    //         this.showAlert2();
+    //     }
+    //     else {
+    //             this.props.navigation.navigate('SendSms').catch((error) => {
+    //             this.showAlert();
+    //             this.setState({messageError: 'خطا'});
+    //
+    //         });
+    //     }
+    // }
+    //
+    // showAlert = () => {
+    //     this.setState({
+    //         showAlert: true,
+    //     });
+    // };
+    //
+    // hideAlert = () => {
+    //     this.setState({
+    //         showAlert: false,
+    //     });
+    // };
+    //
+    renderRegister() {
+        if (this.props.loading) {
+            return (<ActivityIndicator/>);
         }
-    };
-    clickdialogVisible = () => {
-            this.setState({dialogVisible: true});
-    };
-    clickdialogVisibleErr = () => {
-        this.setState({dialogVisibleErr: true});
-    };
-    onMobileChange(text) {
-        this.props.mobileChanged(text);
+        return (
+            <TouchableOpacity activeOpacity={0.8} style={styles.buttonStyle}
+                          //    onPress={this.onRegisterUser.bind(this)}
+                              onPress={() => this.props.navigation.navigate('SendSms')}
+
+            >
+                <Text style={styles.textButton}>ok</Text>
+            </TouchableOpacity>
+
+        )
     }
 
-    onLoginUser() {
-        const {mobile} = this.props;
-        const {navigation} = this.props;
-        if ((mobile.length < 1)) {
-            this.setState({messageError: 'Please Enter Mobile Number'});
-            this.clickdialogVisible();
-        } else if (mobile.length < 11) {
-            this.setState({messageError: 'Enter the mobile number completely'});
-            this.clickdialogVisible();
-        }
-        else {
-            this.props.loginUser({mobile, navigation});
-            if (this.props.success === false && this.props.error.length > 1) {
-                let x = this.props.error;
-                this.clickdialogVisibleErr();
-            }
-        }
-    }
-
-     */
 
     render() {
+        const {showAlert,showAlert2} = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} translucent={true} networkActivityIndicatorVisible={true}
                            backgroundColor={'#000'}
                            barStyle="light-content"/>
                 <ScrollView>
-                        <Image style={styles.image}
-                            source={require('../../../assets/images/ZipZip.png')}/>
+                    <Image style={styles.image}
+                           source={require('../../../assets/images/ZipZip.png')}/>
                     <View style={styles.buttonContainer}>
-                         <View style={styles.input}>
-                                 <View style={styles.containerCC}>
-                                 <CountryPicker style={{flex:3}}
-                                     onSelect={(value)=> this.setState({country: value,code:value.callingCode,cca2: value.cca2})}
-                                     cca2={this.state.cca2}
-                                     translation='eng'
-                                      withFilter={true}
-                                     countryCode={'US'}
-                                     withCallingCode={true}
-                                     withAlphaFilter={true}
-                                     withFlag={true}
-                                     />
-                                 <Text style={styles.textCC}>{this.state.cca2} (+{this.state.code}) </Text>
-                                     <Icon
-                                         name='angle-down'
-                                         color='#000'
-                                         size={35} style={{flex:1,marginLeft:'35%',marginRight:'-5%'}}/>
-                                 </View>
-                             </View>
                         <View style={styles.input}>
-                        <TextInput style={{marginRight: 18, fontFamily: 'FuturaStd-Bold',textAlign:"center"}}
-                                placeholder="please enter your mobile number"
-                                underlineColorAndroid="transparent"
-                                keyboardType="numeric"
-                                maxLength={10}
-                                value={this.props.mobile}
+                            <View style={styles.containerCC}>
+                                <CountryPicker style={{flex:3}}
+                                               onSelect={(value)=> this.setState({country: value,code:value.callingCode,cca2: value.cca2})}
+                                               cca2={this.state.cca2}
+                                               translation='eng'
+                                               withFilter={true}
+                                               countryCode={'US'}
+                                               withCallingCode={true}
+                                               withAlphaFilter={true}
+                                               withFlag={true}
+                                />
+                                <Text style={styles.textCC}>{this.state.cca2} (+{this.state.code}) </Text>
+                                <Icon
+                                    name='angle-down'
+                                    color='#000'
+                                    size={35} style={{flex:1,marginLeft:'35%',marginRight:'-5%'}}/>
+                            </View>
+                        </View>
+                        <View style={styles.input}>
+                            <TextInput style={{marginRight: 18, fontFamily: 'FuturaStd-Bold',textAlign:"center"}}
+                                       placeholder="please enter your mobile number"
+                                       underlineColorAndroid="transparent"
+                                       keyboardType="numeric"
+                                       maxLength={11}
+                                       value={this.props.mobile}
                                // onChangeText={this.onMobileChange.bind(this)}
                             />
                         </View>
-                        <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SendSms')}>
-                            <View style={styles.buttonStyle}>
-                                <Text style={styles.textButton}>OK </Text>
-                            </View>
-                        </TouchableOpacity>
+                        {this.renderRegister()}
                     </View>
-                    {/*<Button style={styles.buttonStyle} labelStyle={styles.textButton}*/}
-                    {/*onPress={() => this.props.navigation.navigate('SendSms')}>OK</Button>*/}
-                       <View style={styles.footer}>
+                        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 2}}>
+
+                            <View style={styles.footer}>
                         <Icon
                             name='minus'
                             color='#000'
                             size={35} style={{marginRight: 15}}/>
                     </View>
+                        </View>
                 </ScrollView>
-                <Dialog
-                    visible={this.state.dialogVisible}
-                    dialogStyle={{backgroundColor:'#fff',width:350,height:270,justifyContent:"center",alignItems:"center",
-                        borderRightWidth:6,borderBottomWidth:4,borderLeftWidth:2,borderTopWidth:2,borderColor:"#000"}}
-                    // title="warning"
-                    onTouchOutside={() => this.setState({dialogVisible: false})} >
-                    <View style={{marginTop:5,borderTopWidth:3,borderTopColor:"#000",alignSelf:"center"}}>
-                        <Text style={{
-                            color: '#000',
-                            fontSize: 20,
-                            marginTop:5,
-                            fontFamily: 'HelveticaNeueLTStd-Md',
-                            alignSelf: 'center',
-                            textAlign:"center"
-                        }}>
-                            {this.state.messageError}</Text>
-                    </View>
-                </Dialog>
-                <Dialog
-                    visible={this.state.dialogVisibleErr}
-                    dialogStyle={{backgroundColor:'#fff',width:350,height:270,justifyContent:"center",alignItems:"center",
-                        borderRightWidth:6,borderBottomWidth:4,borderLeftWidth:2,borderTopWidth:2,borderColor:"#000"}}
-                    // title="warning"
-                    onTouchOutside={() => this.setState({dialogVisibleErr: false})} >
-                    <View style={{marginTop:5,borderTopWidth:3,borderTopColor:"#000",alignSelf:"center"}}>
-                        <Text style={{
-                            color: '#000',
-                            fontSize: 20,
-                            marginTop:5,
-                            fontFamily: 'HelveticaNeueLTStd-Md',
-                            alignSelf: 'center',
-                            textAlign:"center"
-                        }}>
-                            {this.state.Error}</Text>
-                    </View>
-                </Dialog>
+                <AwesomeAlert
+                    contentContainerStyle={{width: '80%', borderRadius: 5}}
+                    overlayStyle={{backgroundColor: 'rgba(00,00,00,.80)'}}
+                    title={<Text><Icon size={30} name={'info'} color={'#3d933c'}></Icon></Text>}
+                    confirmText="تایید"
+                    show={showAlert}
+                    showProgress={false}
+                    message={this.state.messageError}
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showConfirmButton={true}
+                    titleStyle={{fontSize: 14, fontFamily: 'IRANSansMobile(FaNum)'}}
+                    messageStyle={{fontSize: 15, fontFamily: 'IRANSansMobile(FaNum)'}}
+
+                    confirmButtonColor="#3d933c"
+                    confirmButtonStyle={{}}
+                    confirmButtonTextStyle={{fontSize: 17, fontFamily: 'IRANSansMobile(FaNum)'}}
+                    onConfirmPressed={() => {
+                        this.hideAlert();
+                    }}
+                />
+
+                <AwesomeAlert
+                    contentContainerStyle={{width: '80%', borderRadius: 5}}
+                    overlayStyle={{backgroundColor: 'rgba(00,00,00,.80)'}}
+                    title={<Text><Icon size={30} name={'info'} color={'#3d933c'}></Icon></Text>}
+                    confirmText="تایید"
+                    show={showAlert2}
+                    showProgress={false}
+                    message={this.state.messageError2}
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showConfirmButton={true}
+                    titleStyle={{fontSize: 14, fontFamily: 'IRANSansMobile(FaNum)'}}
+                    messageStyle={{fontSize: 15, fontFamily: 'IRANSansMobile(FaNum)'}}
+                    confirmButtonColor="#3d933c"
+                    confirmButtonStyle={{}}
+                    confirmButtonTextStyle={{fontSize: 17, fontFamily: 'IRANSansMobile(FaNum)'}}
+                    onConfirmPressed={() => {
+                        this.hideAlert2();
+                    }}/>
+
             </View>
         );
     }
 }
+
+const resizeMode = 'center';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -237,3 +256,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 });
+
+const mapStateToProps = state => {
+    return {
+        // mobile: state.registerUser.mobile,
+        // loading: state.registerUser.loading,
+        // success: state.registerUser.success,
+        // error: state.registerUser.error,
+    };
+};
+export default connect(mapStateToProps, {
+    mobileChanged,
+    registerUser,
+})(Register);

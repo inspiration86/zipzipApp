@@ -3,16 +3,37 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar, Dimensions,
+    Image, StatusBar, Dimensions, TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ProgressBar} from 'react-native-multicolor-progress-bar';
 import {ScrollView} from 'react-native-gesture-handler';
+import {FlatGrid} from 'react-native-super-grid';
+import {Card} from 'react-native-paper';
 const {width, height} = Dimensions.get('window');
 export default class Report extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: [
+                {
+                    id: 1,
+                    totalPhotos:'47.8',
+                    zipzipedPhotos:'25',
+
+                }
+                ,
+                {
+                    id: 2,
+                    totalPhotos:'47.8',
+                    zipzipedPhotos:'25',
+                }
+                ,
+                {
+                    id: 3,
+                    image:require('../../../assets/images/DocZip.png'),
+                }
+            ],
         };
     }
     render() {
@@ -23,7 +44,7 @@ export default class Report extends Component {
                            barStyle="light-content" />
                 <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
                     <View style={{flexDirection:'row',marginLeft:10}}>
-                        <Icon
+                        <Icon onPress={()=>{this.props.navigation.goBack()}}
                             name='arrow-left'
                             color='#000'
                             size={25}  style={{marginLeft:10}}/>
@@ -113,6 +134,40 @@ export default class Report extends Component {
                             <Text style={{marginLeft:5,marginTop:20,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:12,color:"#777"}}>Docs</Text>
                         </View>
                     </View>
+
+
+                    <FlatGrid
+                        // itemDimension={250}
+                        staticDimension={160}
+                        items={this.state.data}
+                        contentContainerStyle={{marginHorizontal:120,justifyContent: 'center', alignItems: 'center',alignSelf:"center"}}
+                        renderItem={({item, index}) => (
+                            <TouchableOpacity activeOpacity={0.9}
+                                              onPress={() => this.cardNavigate(item)}
+                                // onPress={() => this.clickEventListenerMovzip()}
+                            >
+                                <View>
+                                    <Card style={{
+                                        width: 150, height: 150,
+                                        shadowColor: '#000',
+                                        marginVertical:10,
+                                        borderRadius:5,
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 2,
+                                            marginRight: 16,
+                                            marginBottom: 12,
+                                        },
+                                        shadowOpacity: 0.25,
+                                        shadowRadius: 3.84,
+                                        elevation: 12,
+                                    }}><Card.Cover style={styles.image} source={item.totalPhotos}/>
+                                    </Card>
+                                </View>
+                            </TouchableOpacity>
+                        )}/>
+
+
                     <View style={styles.reportContainer}>
                         <View style={styles.result}>
                             <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>TOTAL PHOTOS</Text></View>

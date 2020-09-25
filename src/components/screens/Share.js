@@ -37,11 +37,10 @@ const ShareExample = () => {
                    barStyle="light-content" />
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
             <View style={{flexDirection:'row',marginLeft:10}}>
-                <Icon
+                <Icon onPress={()=>{this.props.navigation.goBack()}}
                     name='arrow-left'
                     color='#000'
                     size={25}  style={{marginLeft:10}}/>
-
             </View>
         </View>
         <ScrollView>

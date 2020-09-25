@@ -4,10 +4,10 @@ import {
     Text,
     View,
     Image,
-    TextInput,
+    TextInput, Dimensions,
 
 } from 'react-native';
-import {Card} from 'react-native-paper';
+import {Card, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
@@ -20,7 +20,7 @@ import {
     faMailBulk,
     faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import {faInbox} from '@fortawesome/free-solid-svg-icons/faInbox';
+const {width, height} = Dimensions.get('window');
 
 export default class App extends Component {
     constructor(props) {
@@ -36,12 +36,10 @@ export default class App extends Component {
                     <Card style={styles.card}>
                         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
                             <View style={{flexDirection:'row',marginLeft:10}}>
-
-                                <Icon
+                                <Icon onPress={()=>{this.props.navigation.goBack()}}
                                     name='arrow-left'
                                     color='#fff'
                                     size={22}  style={{marginLeft:10}}/>
-
                             </View>
                         </View>
                         <View style={{
@@ -67,7 +65,7 @@ export default class App extends Component {
                         </Text>
                     </Card>
                     <Collapse>
-                        <CollapseHeader style={{borderBottomColor:"#000",borderBottomWidth:3,marginHorizontal:15,marginTop:15}}>
+                        <CollapseHeader style={styles.header}>
                         <View style={{flexDirection:"row"}}>
                             <Icon
                                 name='bar-chart-o'
@@ -75,11 +73,12 @@ export default class App extends Component {
                                 size={25} style={{marginHorizontal:5,marginBottom: 5,marginTop:-5}}/>
                             <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize:16}}>Quick Storage Report</Text>
                             <Icon
-                                name='angle-down'
+                                name='angle-right'
                                 color='#000'
-                                size={25} style={{marginLeft:'40%'}}/>
+                                size={25} style={styles.icon}/>
                         </View>
-                    </CollapseHeader>
+                            <Divider style={styles.divider} />
+                        </CollapseHeader>
                     <CollapseBody>
                         <View style={{marginTop:30,justifyContent:"center",alignItems:"center",flex:1}}>
                             <View style={{flex:2,flexDirection:"row",marginHorizontal:40}}>
@@ -94,7 +93,7 @@ export default class App extends Component {
                     </CollapseBody>
                 </Collapse>
                     <Collapse>
-                        <CollapseHeader style={{borderBottomColor:"#000",borderBottomWidth:3,marginHorizontal:15,marginTop:15}}>
+                        <CollapseHeader style={styles.header}>
                             <View style={{flexDirection:"row"}}>
                                 <Icon
                                     name='user-circle'
@@ -102,10 +101,11 @@ export default class App extends Component {
                                     size={25} style={{marginHorizontal:5,marginBottom: 5,marginTop:-5}}/>
                                 <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize:16}}>Change Profile Picture</Text>
                                 <Icon
-                                    name='angle-down'
+                                    name='angle-right'
                                     color='#000'
-                                    size={25} style={{marginLeft:'40%'}}/>
+                                    size={25} style={styles.icon}/>
                             </View>
+                            <Divider style={styles.divider} />
                         </CollapseHeader>
                         <CollapseBody>
                             <View style={{backgroundColor:"#fff",marginTop:10,alignSelf:"center",borderRadius:60,borderWidth:3,borderColor:"#000",width:100,height:100}}>
@@ -114,26 +114,29 @@ export default class App extends Component {
                                     source={require('../../../assets/images/u1.png')}
                                 />
                             </View>
-                            <View style={{justifyContent:"center",alignItems:"center",marginLeft:'57%',marginTop:-68,backgroundColor:"#000",width:30,height:30,borderRadius:60,marginBottom:30}}>
+                            <View style={{justifyContent:"center",alignItems:"center",marginLeft:'58%',marginTop:-65,backgroundColor:"#000",width:32,height:32,borderRadius:60,marginBottom:30}}>
                             <Icon
                                 name='plus'
                                 color='#fff'
-                                size={20} style={{alignSelf:"center"}}/>
+                                size={20} />
                            </View>
                         </CollapseBody>
                     </Collapse>
                     <Collapse>
-                        <CollapseHeader style={{borderBottomColor:"#000",borderBottomWidth:3,marginHorizontal:15,marginTop:15}}>
+                        <CollapseHeader style={styles.header}>
                             <View style={{flexDirection:"row"}}>
+
                                 <FontAwesomeIcon color={'#000'} icon={faEnvelope} size={22} style={{marginHorizontal:5,marginBottom: 5,marginTop:-5}}/>
                                 <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize:16}}>Change Email Address</Text>
                                 <Icon
-                                    name='angle-down'
+                                    name='angle-right'
                                     color='#000'
-                                    size={25} style={{marginLeft:'40%'}}/>
+                                    size={25} style={styles.icon}/>
                             </View>
+                            <Divider style={styles.divider} />
                         </CollapseHeader>
                         <CollapseBody>
+
                             <View style={{backgroundColor:'#fff',height:50,width:'80%',alignSelf:'center',borderRadius:5,marginTop:20,borderWidth:1,borderColor:"#000"}}>
                                 <TextInput
                                     style={{textAlign:"center",fontFamily: 'FuturaStd-Bold'}}
@@ -150,7 +153,7 @@ export default class App extends Component {
                         </CollapseBody>
                     </Collapse>
                     <Collapse>
-                        <CollapseHeader style={{borderBottomColor:"#000",borderBottomWidth:3,marginHorizontal:15,marginTop:15}}>
+                        <CollapseHeader style={styles.header}>
                             <View style={{flexDirection:"row"}}>
                                 <Icon
                                     name='mobile'
@@ -158,11 +161,11 @@ export default class App extends Component {
                                     size={28} style={{marginHorizontal:5,marginBottom: 3,marginTop:-5}}/>
                                 <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize:16}}>Change Mobile Number</Text>
                                 <Icon
-                                    //name='caret-down'
-                                    name='angle-down'
+                                    name='angle-right'
                                     color='#000'
-                                    size={25} style={{marginLeft:'40%'}}/>
+                                    size={25} style={styles.icon}/>
                             </View>
+                            <Divider style={styles.divider} />
                         </CollapseHeader>
                         <CollapseBody>
                             <View style={{backgroundColor:'#fff',height:50,width:'80%',alignSelf:'center',borderRadius:5,marginTop:20,borderWidth:1,borderColor:"#000"}}>
@@ -181,7 +184,7 @@ export default class App extends Component {
                         </CollapseBody>
                     </Collapse>
                     <Collapse>
-                        <CollapseHeader style={{borderBottomColor:"#000",borderBottomWidth:3,marginHorizontal:15,marginTop:15}}>
+                        <CollapseHeader style={styles.header}>
                             <View style={{flexDirection:"row"}}>
                                 <Icon
                                     name='birthday-cake'
@@ -189,10 +192,11 @@ export default class App extends Component {
                                     size={25} style={{marginHorizontal:5,marginBottom: 5,marginTop:-5}}/>
                                 <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize:16}}>Add Birthdate</Text>
                                 <Icon
-                                    name='angle-down'
+                                    name='angle-right'
                                     color='#000'
-                                    size={25} style={{marginLeft:'55%'}}/>
+                                    size={25} style={{justifyContent:"center",marginLeft:width-200,paddingVertical:5,marginTop:-10}}/>
                             </View>
+                            <Divider style={styles.divider} />
                         </CollapseHeader>
                         <CollapseBody>
                             <View style={{flexDirection:"row",justifyContent:'space-between',marginTop:15,marginHorizontal:15}}>
@@ -273,5 +277,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
     },
-
+    divider:{height:2.5,width:'100%',marginVertical: 5,backgroundColor:"#000"},
+    icon:{alignSelf:"center",marginLeft:width-260,marginTop: -10},
+    header:{marginHorizontal:15,marginTop:15},
 });
