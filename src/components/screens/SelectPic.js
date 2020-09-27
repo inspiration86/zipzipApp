@@ -7,9 +7,11 @@ import {
 } from 'react-native';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import { Dialog } from 'react-native-simple-dialogs';
-import ImagePicker from 'react-native-image-picker';
 import { Divider } from 'react-native-paper';
 import {ProgressBar} from 'react-native-multicolor-progress-bar';
+import ImagePicker from 'react-native-image-picker';
+let imagePicker = NativeModules.ImageCropPicker;
+
 export default class SelectPic extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +24,94 @@ export default class SelectPic extends Component {
         };
     }
 
+    multiple(){
+        ImagePicker.openPicker({
+            multiple: true
+        }).then(images => {
+            console.log(images);
+        }).then(images => {
+            // this.setState({
+            //     images: this.state.images.concat({
+            //         uri: images.path,
+            //         width: images.width,
+            //         height: images.height,
+            //         mime: images.mime
+            //     }),
+            // })
+            this.setState({
+                image: null,
+                images: images.map(i => {
+                    console.log('received image', i);
+                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                })
+            });
+        }).catch(e => alert(e));
+    }
+
+    //select multiple image in gallery
+    pickMultiple() {
+        // this._hideDialog();
+        imagePicker.openPicker({
+            title: 'Select Image',
+            storageOptions: {
+                skipBackup: true,
+                path: 'compress'
+            },
+            multiple: true,
+            waitAnimationEnd: false,
+            sortOrder: 'desc',
+            includeExif: true,
+            forceJpg: true,
+        }).then(images => {
+            // this.setState({
+            //     images: this.state.images.concat({
+            //         uri: images.path,
+            //         width: images.width,
+            //         height: images.height,
+            //         mime: images.mime
+            //     }),
+            // })
+            this.setState({
+                image: null,
+                images: images.map(i => {
+                    console.log('received image', i);
+                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                })
+            });
+        }).catch(e => alert(e));
+    }
+
+   multiSelect(){
+       const options = {
+           title: 'Select images to zipzip',
+           multiple: true,
+           mediaType: "image",
+           storageOptions: {
+               skipBackup: true,
+               path: 'images',
+           },
+       };
+       ImagePicker.launchImageLibrary(options, (response) => {
+           console.log('Response = ', response);
+
+           if (response.didCancel) {
+               console.log('User cancelled image picker');
+           } else if (response.error) {
+               console.log('ImagePicker Error: ', response.error);
+           } else if (response.customButton) {
+               console.log('User tapped custom button: ', response.customButton);
+           } else {
+               const source = { uri: response.uri };
+
+               // You can also display the image using data:
+               // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+               this.setState({
+                   avatarSource: source,
+               });
+           }
+       });
+   }
     clickdialogVisible3 = () => {
         this.setdialogVisible3(true);
     }
@@ -79,7 +169,7 @@ export default class SelectPic extends Component {
                            backgroundColor={'#000'}
                            barStyle="light-content" />
                 <ScrollView>
-                    <TouchableOpacity activeOpacity={0.92} onPress={() => this.SingleImage()}>
+                    <TouchableOpacity activeOpacity={0.92} onPress={() => this.multiple()}>
                         <View style={{justifyContent:"center",alignItems:"center",backgroundColor:"#000",marginHorizontal:110,marginVertical:60,width:200,height:100}}>
                             <Text style={{color:"#fff",fontFamily: 'FuturaStd-Bold',fontSize:23,alignSelf:"center",padding:20}}>Select Photo</Text>
                         </View>

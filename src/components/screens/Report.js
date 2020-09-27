@@ -3,13 +3,15 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar, Dimensions, TouchableOpacity,
+    Image, StatusBar, Dimensions, TouchableOpacity, FlatList,
 } from 'react-native';
+import { Divider } from 'react-native-paper';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ProgressBar} from 'react-native-multicolor-progress-bar';
 import {ScrollView} from 'react-native-gesture-handler';
 import {FlatGrid} from 'react-native-super-grid';
-import {Card} from 'react-native-paper';
+import {Card,Title,Paragraph} from 'react-native-paper';
 const {width, height} = Dimensions.get('window');
 export default class Report extends Component {
     constructor(props) {
@@ -73,7 +75,15 @@ export default class Report extends Component {
                     {/*    name='sd'*/}
                     {/*    color='#fff'*/}
                     {/*    size={25} style={{marginRight:'50%',marginTop:-20}}/>*/}
-                    <View style={{width:'75%',borderRadius:5,height:180,marginHorizontal:30,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:10,backgroundColor:"#000"}}>
+                    <View style={{width:'80%',borderRadius:5,height:180,marginHorizontal:30,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:10,backgroundColor:"#000",shadowOffset: {
+                        width: 0,
+                        height: 2,
+                        marginRight: 16,
+                        marginBottom: 12,
+                    },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+                        elevation: 12}}>
                         <Image
                             style={{width: 60, height: 45,marginRight:'50%',marginTop:-10,marginBottom:10}}
                             source={require('../../../assets/images/iconstorage.png')}
@@ -136,37 +146,47 @@ export default class Report extends Component {
                     </View>
 
 
+
                     <FlatGrid
-                        // itemDimension={250}
-                        staticDimension={160}
+                        //itemDimension={200}
+                        staticDimension={200}
                         items={this.state.data}
-                        contentContainerStyle={{marginHorizontal:120,justifyContent: 'center', alignItems: 'center',alignSelf:"center"}}
+                        fixed={true}
+                        itemContainerStyle={{justifyContent: 'center', alignItems: 'center',marginTop:30,}}
+                      //  spacing={10}
+                        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
                         renderItem={({item, index}) => (
-                            <TouchableOpacity activeOpacity={0.9}
-                                              onPress={() => this.cardNavigate(item)}
-                                // onPress={() => this.clickEventListenerMovzip()}
-                            >
                                 <View>
+
                                     <Card style={{
-                                        width: 150, height: 150,
-                                        shadowColor: '#000',
-                                        marginVertical:10,
-                                        borderRadius:5,
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 2,
-                                            marginRight: 16,
-                                            marginBottom: 12,
-                                        },
-                                        shadowOpacity: 0.25,
-                                        shadowRadius: 3.84,
-                                        elevation: 12,
-                                    }}><Card.Cover style={styles.image} source={item.totalPhotos}/>
+                        width: 320, height: 110,
+                        shadowColor: '#000',
+                        borderRadius:5,
+                        shadowOffset: {
+                        width: 0,
+                        height: 2,
+                        marginRight: 16,
+                        marginBottom: 12,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+                        elevation: 12,
+                        }}>
+                                        <Card.Content style={{flex:1}}>
+                                            <View style={{flexDirection:"row",flex:1,justifyContent: 'center', alignItems: 'center'}}>
+                                            <Title style={[styles.textTable,{color:'#000',fontSize:14,flex:1}]}>TOTAL PHOTOS</Title>
+                                                <Title style={[styles.textTable,{color:'#fff',fontSize:14,flex:1,backgroundColor:"#000",borderRadius: 5}]}>47.8 GB</Title>
+                                            </View>
+                                            <Divider style={styles.divider} />
+
+                                            <View style={{flexDirection:"row",flex:1,justifyContent: 'center', alignItems: 'center',marginTop:10}}>
+                                            <Title style={[styles.textTable,{color:'#000',fontSize:14,flex:1}]}>ZIPZIPED PHOTOS</Title>
+                                            <Title style={[styles.textTable,{color:'#fff',fontSize:14,flex:1,backgroundColor:"#000",borderRadius: 5,marginTop: 5}]}>25 GB</Title>
+                                            </View>
+                                        </Card.Content>
                                     </Card>
                                 </View>
-                            </TouchableOpacity>
                         )}/>
-
 
                     <View style={styles.reportContainer}>
                         <View style={styles.result}>
@@ -217,10 +237,13 @@ const styles = StyleSheet.create({
         fontFamily: 'HelveticaNeueLTStd-Md',
         marginHorizontal:20
     },
-    reportContainer:{marginTop:30,justifyContent:"center",alignItems:"center",marginBottom:5},
+    reportContainer:{marginTop:30,justifyContent:"center",alignItems:"center",marginBottom:5,},
     textTable:{color:"#fff",fontSize: 18,fontFamily: 'FuturaStd-Bold',textAlign:"center",padding:5},
     result:{flex:2,flexDirection:"row",borderBottomWidth:3,borderBottomColor:"#000",marginHorizontal:60},
     photo:{flex:1,paddingHorizontal:2},
     volume:{borderRadius:3,flex:1,backgroundColor:"#000",paddingHorizontal:2,borderBottomWidth:2,borderBottomColor:"#fff"},
+    divider:{height:1,width:'100%',marginTop: 10
+        //backgroundColor:"#000"
+    },
 
 });

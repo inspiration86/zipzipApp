@@ -5,6 +5,7 @@ import {
     View,
     Image, StatusBar, Dimensions,
 } from 'react-native';
+
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 const {width, height} = Dimensions.get('window');
 export default class PicZip extends Component {

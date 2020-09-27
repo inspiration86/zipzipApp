@@ -136,6 +136,9 @@ export default class Faq extends Component {
         )
     }
 }
+
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

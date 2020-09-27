@@ -42,11 +42,11 @@ export default class HelpFree extends Component {
                                     source={require('../../../../assets/images/PicZip.png')}
                                 />
                             </View>
-                            <View style={{marginTop:30,justifyContent:"center",alignItems:"center"}}>
-                                <Text style={{marginHorizontal:15,fontFamily:'HelveticaNeueLTStd-Md',fontSize:20,color:"#000",textAlign:"center"}}>You can use the 100 MB Free TEST at first and check he size and quality of photos got ZipZiped and make sure that how they will remain 100% unchanged.</Text>
+                            <View style={{marginTop:30,justifyContent:"center",alignItems:"center",marginHorizontal:30}}>
+                                <Text style={{marginHorizontal:15,fontFamily:'HelveticaNeueLTStd-Md',fontSize:20,color:"#000",textAlign:"justify"}}>You can use the 100 MB Free TEST at first and check he size and quality of photos got ZipZiped and make sure that how they will remain 100% unchanged.</Text>
                             </View>
                         </View>
-                        <View style={{marginTop:40}}>
+                        <View style={{marginTop:20}}>
 
                             <TouchableOpacity activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPic')}>
                                 <View style={styles.buttonStyle}>
