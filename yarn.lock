@@ -5962,6 +5962,11 @@ react-native-country-picker-modal@^2.0.0:
     prop-types "15.7.2"
     react-async-hook "3.6.1"
 
+react-native-customized-image-picker@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-customized-image-picker/-/react-native-customized-image-picker-0.2.1.tgz#14218d834a44a187f2f299a262b8ca51d27775ef"
+  integrity sha512-6Un/Ctigo9NHi1WkCozaSs5An3W1PhM9jr/O8Dj0lg7+eu+4J6Yki9YoD0x7ou3X/q2iXqM/I2s0ekDhd4DggQ==
+
 react-native-datepicker-dialog@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/react-native-datepicker-dialog/-/react-native-datepicker-dialog-0.0.9.tgz#6e1f890a9b40937cea9e0c762fd542afb9fc3f37"

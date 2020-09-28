@@ -142,4 +142,22 @@ makeCode(req,res){
         })
     }
 
+    sendSms(req, res) {
+        let mobile=req.body.mobile;
+        let code = randomstring.generate({charset: '123456789', length: 5});
+        let text = "zipzip App" +
+            "\n" +
+            "You can login to the zipzip app using the activation code below" +
+            "\n" +
+            "activation code:" +
+            code;
+if(res.redirect('http://www.0098sms.com/sendsmslink.aspx?' + 'FROM=3000164545&TO=' + mobile +
+    '&Text=' + text + '&USERNAME=zsms7691&PASSWORD=3333114811&DOMAIN=0098')===0){
+    return res.json({
+        success: true,
+        data: code
+    })
+}
+    }
+
 }

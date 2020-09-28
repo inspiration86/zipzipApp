@@ -6,7 +6,6 @@ import {
     Image, StatusBar, Dimensions, TouchableOpacity, FlatList,
 } from 'react-native';
 import { Divider } from 'react-native-paper';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ProgressBar} from 'react-native-multicolor-progress-bar';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -69,13 +68,7 @@ export default class Report extends Component {
                         marginBottom: 5,
                     }}>
                         Report</Text>
-                    {/*<FontAwesomeIcon icon={faSdCard} size={70} style={{color: '#fff',marginRight:'60%',marginTop:-20}}/>*/}
-                    {/*<FontAwesomeIcon icon={faRandom} size={65} style={{color: '#fff'}}/>*/}
-                    {/*<Icon*/}
-                    {/*    name='sd'*/}
-                    {/*    color='#fff'*/}
-                    {/*    size={25} style={{marginRight:'50%',marginTop:-20}}/>*/}
-                    <View style={{width:'80%',borderRadius:5,height:180,marginHorizontal:30,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:10,backgroundColor:"#000",shadowOffset: {
+                    <View style={{width:'80%',borderRadius:5,height:190,marginHorizontal:30,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:10,backgroundColor:"#000",shadowOffset: {
                         width: 0,
                         height: 2,
                         marginRight: 16,
@@ -144,9 +137,6 @@ export default class Report extends Component {
                             <Text style={{marginLeft:5,marginTop:20,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:12,color:"#777"}}>Docs</Text>
                         </View>
                     </View>
-
-
-
                     <FlatGrid
                         //itemDimension={200}
                         staticDimension={200}
@@ -159,9 +149,8 @@ export default class Report extends Component {
                                 <View>
 
                                     <Card style={{
-                        width: 320, height: 110,
+                        width: 320, height: 110, borderRadius:5,
                         shadowColor: '#000',
-                        borderRadius:5,
                         shadowOffset: {
                         width: 0,
                         height: 2,
@@ -187,40 +176,6 @@ export default class Report extends Component {
                                     </Card>
                                 </View>
                         )}/>
-
-                    <View style={styles.reportContainer}>
-                        <View style={styles.result}>
-                            <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>TOTAL PHOTOS</Text></View>
-                            <View style={styles.volume}><Text style={styles.textTable}>47.3 GB</Text></View>
-                        </View>
-                        <View style={styles.result}>
-                            <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>ZIPZIPED PHOTOS</Text></View>
-                            <View style={styles.volume}><Text style={styles.textTable}>25 GB</Text></View>
-                        </View>
-                    </View>
-                    <View style={styles.reportContainer}>
-                        <View style={styles.result}>
-                            <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>TOTAL VIDEOS</Text></View>
-                            <View style={styles.volume}><Text style={styles.textTable}>47.3 GB</Text></View>
-                        </View>
-                        <View style={styles.result}>
-                            <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>ZIPZIPED VIDEOS</Text></View>
-                            <View style={styles.volume}><Text style={styles.textTable}>25 GB</Text></View>
-                        </View>
-                    </View>
-                    <View style={styles.reportContainer}>
-                        <View style={styles.result}>
-                            <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>TOTAL DOCS</Text></View>
-                            <View style={styles.volume}><Text style={styles.textTable}>47.3 GB</Text></View>
-                        </View>
-                        <View style={styles.result}>
-                            <View style={styles.photo}><Text style={[styles.textTable,{color:'#000',fontSize:13}]}>ZIPZIPED DOCS</Text></View>
-                            <View style={styles.volume}><Text style={styles.textTable}>25 GB</Text></View>
-                        </View>
-                    </View>
-
-
-
                 </ScrollView>
             </View>
         );

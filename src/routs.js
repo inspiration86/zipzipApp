@@ -189,7 +189,7 @@ const RootStack = createStackNavigator({
         },
     {
        initialRouteName: 'DashboardUser',
-     //  initialRouteName: 'Slider',
+     // initialRouteName: 'Report',
     },
     {
         defaultNavigationOptions: {headerShown: false}

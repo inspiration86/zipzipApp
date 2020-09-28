@@ -3,25 +3,69 @@ import {
     StyleSheet,
     Text,
     View,
-    Image, StatusBar, TextInput, Modal,NativeModules
+    Image, StatusBar, Modal
 } from 'react-native';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
-import { Dialog } from 'react-native-simple-dialogs';
 import { Divider } from 'react-native-paper';
 import {ProgressBar} from 'react-native-multicolor-progress-bar';
-import ImagePicker from 'react-native-image-picker';
-let imagePicker = NativeModules.ImageCropPicker;
-
+import ImagePicker from "react-native-customized-image-picker";
 export default class SelectPic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dialogVisible:false,
-            dialogVisible2:false,
-            dialogVisible3:false,
-            avatarSource:'',
-            infoImage:0,
+            notEnoughStorage:false,
+            greaterThan100mb:false,
+            sizeSelectedImage:false,
+            images:[],
+            totalSize:0,
+            count:0,
+            unit:'',
         };
+    }
+
+    customeSelectPic(){
+        ImagePicker.openPicker({
+            title:'Select Photos to zipzip',
+            multiple: true,
+            cropping: true,
+            maxSize:200,
+            imageLoader:'PICASSO',
+            storageOptions: {
+                skipBackup: true,
+                path: 'zipzip',
+            },
+        }).then(images => {
+
+            let totalSize=0;
+            for (let i=0;i<images.length;i++){
+                console.log('images'+i+'=',images[i].size);
+                totalSize+=images[i].size
+            }
+            if (totalSize<=1024) {
+                this.setState({totalSize:  (totalSize).toFixed(2),unit:'B'});
+            } else if(totalSize<=1024*1024){
+                this.setState({
+                    totalSize:  (totalSize/(1024)).toFixed(2),unit:'KB'});
+            }
+            else if(totalSize<=1024*1024*1024){
+                if((totalSize>=(100*1024*1024))){
+                    this.setState({totalSize:  (totalSize/(1024*1024)).toFixed(2),unit:'MB'});
+                    this.clickEventListenergreaterThan100mb();
+                }
+                else
+                this.setState({totalSize:  (totalSize/(1024*1024)).toFixed(2),unit:'MB'});
+            }
+            ///set state
+            this.setState({count:images.length})
+            this.setState({
+                image: null,
+                images: images.map(i => {
+                  //  console.log('received image', i);
+                   return {uri: i.path, mime: i.mime};
+                    this.setState({uri:i.path,mime: i.mime,size:i.size});
+                })
+            });
+        });
     }
 
     multiple(){
@@ -48,119 +92,26 @@ export default class SelectPic extends Component {
         }).catch(e => alert(e));
     }
 
-    //select multiple image in gallery
-    pickMultiple() {
-        // this._hideDialog();
-        imagePicker.openPicker({
-            title: 'Select Image',
-            storageOptions: {
-                skipBackup: true,
-                path: 'compress'
-            },
-            multiple: true,
-            waitAnimationEnd: false,
-            sortOrder: 'desc',
-            includeExif: true,
-            forceJpg: true,
-        }).then(images => {
-            // this.setState({
-            //     images: this.state.images.concat({
-            //         uri: images.path,
-            //         width: images.width,
-            //         height: images.height,
-            //         mime: images.mime
-            //     }),
-            // })
-            this.setState({
-                image: null,
-                images: images.map(i => {
-                    console.log('received image', i);
-                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-                })
-            });
-        }).catch(e => alert(e));
+    clickEventListenersizeselectedImage = () => {
+        this.setModalVisiblesizeSelectedImage(true);
+    }
+    setModalVisiblesizeSelectedImage(visible) {
+        this.setState({sizeSelectedImage: visible});
+    }
+    clickEventListenernotEnoughStorage = () => {
+        this.setModalVisiblenotEnoughStorage(true);
+    }
+    setModalVisiblenotEnoughStorage(visible) {
+        this.setState({notEnoughStorage: visible});
+    }
+    clickEventListenergreaterThan100mb = () => {
+        this.setModalVisiblegreaterThan100mb(true);
+    }
+    setModalVisiblegreaterThan100mb(visible) {
+        this.setState({greaterThan100mb: visible});
     }
 
-   multiSelect(){
-       const options = {
-           title: 'Select images to zipzip',
-           multiple: true,
-           mediaType: "image",
-           storageOptions: {
-               skipBackup: true,
-               path: 'images',
-           },
-       };
-       ImagePicker.launchImageLibrary(options, (response) => {
-           console.log('Response = ', response);
 
-           if (response.didCancel) {
-               console.log('User cancelled image picker');
-           } else if (response.error) {
-               console.log('ImagePicker Error: ', response.error);
-           } else if (response.customButton) {
-               console.log('User tapped custom button: ', response.customButton);
-           } else {
-               const source = { uri: response.uri };
-
-               // You can also display the image using data:
-               // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-               this.setState({
-                   avatarSource: source,
-               });
-           }
-       });
-   }
-    clickdialogVisible3 = () => {
-        this.setdialogVisible3(true);
-    }
-    setdialogVisible3(visible) {
-        this.setState({dialogVisible3: visible});
-    }
-    clickdialogVisible2 = () => {
-        this.setdialogVisible2(true);
-    }
-    setdialogVisible2(visible) {
-        this.setState({dialogVisible2: visible});
-    }
-    clickdialogVisible = () => {
-        this.setdialogVisible(true);
-    }
-    setdialogVisible(visible) {
-        this.setState({dialogVisible: visible});
-    }
-    SingleImage() {
-        // More info on all the options is below in the API Reference... just some common use cases shown here
-        const options = {
-            title: 'Select Photos',
-            multiple: true,
-        //    customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-            storageOptions: {
-                skipBackup: true,
-                path: 'ZipZip',
-            },
-        };
-        ImagePicker.launchImageLibrary(options, (response) => {
-            console.log('Response = ', response);
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            } else {
-                const source = { uri: response.uri };
-               // const info={fileSize:response.fileSize};
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-                this.setState({
-                    avatarSource: source,
-                   // infoImage:info,
-                });
-            }
-        });
-    }
     render() {
      //   const  image = this.state;
         return (
@@ -169,15 +120,17 @@ export default class SelectPic extends Component {
                            backgroundColor={'#000'}
                            barStyle="light-content" />
                 <ScrollView>
-                    <TouchableOpacity activeOpacity={0.92} onPress={() => this.multiple()}>
-                        <View style={{justifyContent:"center",alignItems:"center",backgroundColor:"#000",marginHorizontal:110,marginVertical:60,width:200,height:100}}>
+                    <TouchableOpacity activeOpacity={0.92} onPress={() => this.customeSelectPic()}>
+                        <View style={{justifyContent:"center",alignItems:"center",borderRadius:5,backgroundColor:"#000",marginHorizontal:110,marginVertical:60,width:200,height:100}}>
                             <Text style={{color:"#fff",fontFamily: 'FuturaStd-Bold',fontSize:23,alignSelf:"center",padding:20}}>Select Photo</Text>
                         </View>
                     </TouchableOpacity>
-                    <Image source={this.state.avatarSource} style={{width:100,height:200,justifyContent:"center",alignItems:"center",alignSelf:"center"}} />
-                    <Text>{this.state.infoImage}</Text>
+                    <Image source={this.state.images[1]} style={{width:100,height:200,justifyContent:"center",alignItems:"center",alignSelf:"center"}} />
+                    <Text style={{textAlign:"center"}}>{this.state.totalSize} {this.state.unit}
+                       number: {this.state.count}
+                    </Text>
                     <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('ZipSuccess')}>
+                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.clickEventListenernotEnoughStorage()}>
                                 <Image style={{width: '55%', height: 35}}
                                     source={require('../../../assets/images/ZipZipWhite.png')}
                                 />
@@ -186,96 +139,98 @@ export default class SelectPic extends Component {
                     <View>
                     </View>
                 </ScrollView>
-                <Dialog
-                    visible={this.state.dialogVisible}
-                    dialogStyle={styles.dialog}
-                    // title="warning"
-                    onTouchOutside={() => this.setState({dialogVisible: false})} >
-                    <Image
-                        style={{width: '95%', height: 95,marginBottom:5,alignSelf:"center"}}
-                        source={require('../../../assets/images/movimg.png')}
-                    />
-                    <Divider style={styles.divider} />
-                    {/*<Text style={{marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,color:"#d21404"}}>100 MB</Text>*/}
-                    {/*<View style={{borderWidth:3,borderColor:"#000",width:300,height:45,backgroundColor:"#d21404"}}></View>*/}
 
-                    <ProgressBar textStyle={{fontFamily: 'HelveticaNeueLTStd-Md',color:'#d21404',fontSize:16,alignSelf:'center',textAlign: 'center',marginTop :-25}}
-                                 parentViewStyle={{alignItems:'stretch'}}
-                                 onStartProgressStyle={{borderTopLeftRadius:0,borderBottomLeftRadius:0}}
-                                 backgroundBarStyle={{alignItems:'stretch',height:30,marginHorizontal:15,marginTop: 40,borderRadius: 0,borderWidth:2,borderColor:"#000",backgroundColor: '#fff'}}
-                                 arrayOfProgressObjects={[
-                                     {
-                                         color: '#d21404',
-                                         value:1,
-                                         opacity: 1,
-                                         nameToDisplay: "100 MB"
-                                     },
-                                 ]}
-                    />
-                    <TouchableOpacity style={styles.buttonStyledialog} activeOpacity={0.92} onPress={() => { this.setModalVisibleMovzip(false) }}>
-                        <Text style={styles.textButton}>
-                            OK</Text>
-                    </TouchableOpacity>
-                </Dialog>
-                <Dialog
-                    visible={this.state.dialogVisible2}
-                    dialogStyle={styles.dialog}
-                    // title="warning"
-                    onTouchOutside={() => this.setState({dialogVisible2: false})} >
-                    <Image
-                        style={{width: '95%', height: 95,marginBottom:5,alignSelf:"center",marginTop:20}}
-                        source={require('../../../assets/images/movimg.png')}
-                    />
-                    <Divider style={styles.divider} />
-                    {/*<View style={{flexDirection:"row"}}>*/}
-                    {/*    <Text style={{flex:2,marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18}}>25 MB</Text>*/}
-                    {/*    <Text style={{flex:1,marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,color:"#b3b3b3"}}>100 MB</Text>*/}
-                    {/*</View>*/}
-                    {/*<View style={{borderWidth:3,borderColor:"#000",width:300,height:45,flexDirection:"row"}}>*/}
-                    {/*    <View style={{flex:2,width:40,backgroundColor:"#000"}}></View>*/}
-                    {/*    <View style={{flex:5,width:40,backgroundColor:"#fff"}}></View>*/}
-                    {/*</View>*/}
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.sizeSelectedImage}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Image
+                                style={{width:250, height:80,marginBottom:5,alignSelf:"center",marginTop:20}}
+                                source={require('../../../assets/images/movimg.png')}
+                            />
+                            <Divider style={styles.divider} />
+                            <ProgressBar textStyle={{fontFamily: 'FuturaStd-Bold',color:'#000',fontSize:16,alignSelf:'center',textAlign: 'center',marginTop :-25}}
+                                         parentViewStyle={{alignItems:'stretch'}}
+                                         onStartProgressStyle={{borderTopLeftRadius:0,borderBottomLeftRadius:0}}
+                                         backgroundBarStyle={{alignItems:'stretch',height:30,marginHorizontal:15,marginTop: 40,borderRadius: 0,borderWidth:2,borderColor:"#000",backgroundColor: '#fff'}}
+                                         arrayOfProgressObjects={[
+                                             {
+                                                 color: '#000',
+                                                 value:0.25,
+                                                 opacity: 1,
+                                                 nameToDisplay: "25 MB"
+                                             },
+                                             {
+                                                 color: '#fff',
+                                                 value:0.75,
+                                                 opacity: 1,
+                                                 nameToDisplay: "100 MB"
+                                             },
+                                         ]}
+                            />
+                            <TouchableOpacity style={styles.buttonStyledialog} activeOpacity={0.92} onPress={() => { this.setModalVisiblesizeSelectedImage(false) }}>
+                                <Text style={styles.textButton}>
+                                    OK</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
 
-                    <ProgressBar textStyle={{fontFamily: 'FuturaStd-Bold',color:'#000',fontSize:16,alignSelf:'center',textAlign: 'center',marginTop :-25}}
-                                 parentViewStyle={{alignItems:'stretch'}}
-                                 onStartProgressStyle={{borderTopLeftRadius:0,borderBottomLeftRadius:0}}
-                                 backgroundBarStyle={{alignItems:'stretch',height:30,marginHorizontal:15,marginTop: 40,borderRadius: 0,borderWidth:2,borderColor:"#000",backgroundColor: '#fff'}}
-                                 arrayOfProgressObjects={[
-                                     {
-                                         color: '#000',
-                                         value:0.25,
-                                         opacity: 1,
-                                         nameToDisplay: "25 MB"
-                                     },
-                                     {
-                                         color: '#fff',
-                                         value:0.75,
-                                         opacity: 1,
-                                         nameToDisplay: "100 MB"
-                                     },
-                                 ]}
-                    />
-                    <TouchableOpacity style={styles.buttonStyledialog} activeOpacity={0.92} onPress={() => { this.setModalVisibleMovzip(false) }}>
-                        <Text style={styles.textButton}>
-                            OK</Text>
-                    </TouchableOpacity>
-                </Dialog>
-                <Dialog
-                    visible={this.state.dialogVisible3}
-                    dialogStyle={styles.dialog}
-                    // title="warning"
-                    onTouchOutside={() => this.setState({dialogVisible3: false})}
-                    onRequestClose={() => this.setState({dialogVisible3: false})}>
-                    <Text style={{color:"#d21404",fontFamily: 'FuturaStd-Bold',fontSize:20,alignSelf:"center",marginBottom:10}}>NOT ENOUGH STORAGE</Text>
-                    <Divider style={styles.divider} />
-                    <Text style={{fontFamily: 'HelveticaNeueLTStd-Md',fontSize:20,alignSelf:"center",textAlign:'center'}}>you should empty your storage for zipziped photos</Text>
-                    <Divider style={styles.divider} />
-                    <Text style={{fontFamily: 'FuturaStd-Bold',fontSize:20,alignSelf:"center"}}>NEW FOLDER SIZE: 25 MB</Text>
-                    <TouchableOpacity style={styles.buttonStyledialog} activeOpacity={0.92} onPress={() => { this.setModalVisibleMovzip(false) }}>
-                        <Text style={styles.textButton}>
-                            Got it</Text>
-                    </TouchableOpacity>
-                </Dialog>
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.notEnoughStorage}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={{marginTop:10,color:"#d21404",fontFamily: 'FuturaStd-Bold',fontSize:20,alignSelf:"center"}}>NOT ENOUGH STORAGE</Text>
+                            <Divider style={styles.divider} />
+                            <Text style={{padding:5,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:20,alignSelf:"center",textAlign:'center'}}>you should empty your storage for zipziped photos</Text>
+                            <Divider style={styles.divider} />
+                            <Text style={{paddingTop:5,fontFamily: 'FuturaStd-Bold',fontSize:20,alignSelf:"center"}}>NEW FOLDER SIZE: 25 MB</Text>
+                            <TouchableOpacity style={styles.buttonStyledialog} activeOpacity={0.92} onPress={() => { this.setModalVisiblenotEnoughStorage(false) }}>
+                                <Text style={styles.textButton}>
+                                    Got it</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
+
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.greaterThan100mb}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Image
+                                style={{width: 250, height: 80,marginBottom:5,alignSelf:"center",marginTop:10}}
+                                source={require('../../../assets/images/movimg.png')}/>
+                            <Divider style={styles.divider} />
+                            <Text style={{padding:5,fontFamily: 'HelveticaNeueLTStd-Md',fontSize:14,alignSelf:"center",textAlign:'center'}}>selected photo over 100MB very large :{this.state.totalSize}  {this.state.unit}</Text>
+
+                            <ProgressBar textStyle={{fontFamily: 'HelveticaNeueLTStd-Md',color:'#d21404',fontSize:16,alignSelf:'center',textAlign: 'center',marginTop :-25}}
+                                         parentViewStyle={{alignItems:'stretch'}}
+                                         onStartProgressStyle={{borderTopLeftRadius:0,borderBottomLeftRadius:0}}
+                                         backgroundBarStyle={{alignItems:'stretch',height:30,marginHorizontal:15,marginTop: 40,borderRadius: 0,borderWidth:2,borderColor:"#000",backgroundColor: '#fff'}}
+                                         arrayOfProgressObjects={[
+                                             {
+                                                 color: '#d21404',
+                                                 value:1,
+                                                 opacity: 1,
+                                                 nameToDisplay: "100 MB"
+                                             },
+                                         ]}/>
+                            <TouchableOpacity style={styles.buttonStyledialog} activeOpacity={0.92} onPress={() => { this.setModalVisiblegreaterThan100mb(false) }}>
+                                <Text style={styles.textButton}>
+                                    OK</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
+
             </View>
         );
     }
@@ -284,6 +239,32 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalView: {
+        margin: 30,
+        backgroundColor: "white",
+        borderRadius: 20,
+        paddingVertical: 5,
+        paddingHorizontal:15,
+        alignItems: "center",
+        borderRightWidth: 8,
+        borderBottomWidth: 6,
+        borderLeftWidth: 2,
+        borderTopWidth: 2,
+        borderColor: '#000',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
     },
     buttonContainer:{
         flex:5,
@@ -304,7 +285,7 @@ const styles = StyleSheet.create({
     buttonStyledialog: {
         backgroundColor: '#000',
         height: 45,
-        width: '90%',
+        width: 150,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
@@ -330,6 +311,5 @@ const styles = StyleSheet.create({
         borderTopWidth:2,
         borderColor:"#000",
     },
-    divider:{height:3,width:'95%',marginVertical: 4,backgroundColor:"#000"},
-
+    divider:{height:1,width:300,marginTop: 10,backgroundColor:"#000"},
 });

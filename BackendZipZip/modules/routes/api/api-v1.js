@@ -29,6 +29,8 @@ adminRouter.post('/login', AdminAuthController.login.bind(AdminAuthController));
 adminRouter.put('/updateAdmin/:id', AdminAuthController.updateAdmin.bind(AdminAuthController));
 
 //user router***********************************************
+router.post('/sendSms', AuthController.sendSms.bind(AuthController));
+
 //upload image
 router.post('/image', uploadImage.single('image'), UploadController.uploadImage.bind(UploadController));
 // auth user

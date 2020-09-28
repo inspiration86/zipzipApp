@@ -10,7 +10,7 @@ import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faEnvelope, faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
-const ShareExample = () => {
+const ShareExample = (props) => {
     const onShare = async () => {
         try {
             const result = await Share.share({
@@ -37,7 +37,7 @@ const ShareExample = () => {
                    barStyle="light-content" />
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
             <View style={{flexDirection:'row',marginLeft:10}}>
-                <Icon onPress={()=>{this.props.navigation.goBack()}}
+                <Icon onPress={()=>{props.navigation.goBack()}}
                     name='arrow-left'
                     color='#000'
                     size={25}  style={{marginLeft:10}}/>
