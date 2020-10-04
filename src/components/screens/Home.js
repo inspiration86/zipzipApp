@@ -10,6 +10,10 @@ import {FlatGrid} from 'react-native-super-grid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Dialog} from 'react-native-simple-dialogs';
 import { Divider } from 'react-native-paper';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faEnvelope, faShareAlt} from '@fortawesome/free-solid-svg-icons';
+import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
+import {faFaucet} from '@fortawesome/free-solid-svg-icons/faFaucet';
 const {width, height} = Dimensions.get('window');
 
 export default class Home extends Component {
@@ -91,8 +95,6 @@ export default class Home extends Component {
                         {/*/>*/}
                     </View>
                     <View style={{marginRight: '7%'}}>
-                        {/*<Text style={{fontSize: 9,*/}
-                        {/*    fontFamily: 'FuturaStd-Bold',}}>menu</Text>*/}
                         <Icon onPress={this.props.navigation.openDrawer}
                               name='bars'
                               color='#000'
@@ -107,9 +109,7 @@ export default class Home extends Component {
                     contentContainerStyle={{marginHorizontal:120,justifyContent: 'center', alignItems: 'center',alignSelf:"center"}}
                     renderItem={({item, index}) => (
                         <TouchableOpacity activeOpacity={0.9}
-                                          onPress={() => this.cardNavigate(item)}
-                                         // onPress={() => this.clickEventListenerMovzip()}
-                        >
+                                          onPress={() => this.cardNavigate(item)}>
                             <View>
                                 <Card style={{
                                     width: 150, height: 150,
@@ -131,13 +131,53 @@ export default class Home extends Component {
                         </TouchableOpacity>
                     )}/>
 
+                {/*<View style={{flex:15}}>*/}
+                {/*    <TouchableOpacity style={styles.touchable} activeOpacity={0.92}*/}
+                {/*                      onPress={() => this.props.navigation.navigate('PicZip')}>*/}
+                {/*        <Image*/}
+                {/*            style={styles.image}*/}
+                {/*            source={require('../../../assets/images/PicZip.png')}*/}
+                {/*        />*/}
+                {/*    </TouchableOpacity>*/}
+                {/*    <TouchableOpacity style={styles.touchable} activeOpacity={0.92}*/}
+                {/*                      onPress={() => this.clickdialogVisibleMovzip()}>*/}
+                {/*        <Image*/}
+                {/*            style={[styles.image,{opacity:0.5}]}*/}
+                {/*            source={require('../../../assets/images/MovZip.png')}*/}
+                {/*        />*/}
+                {/*    </TouchableOpacity>*/}
+                {/*    <TouchableOpacity style={styles.touchable} activeOpacity={0.92}*/}
+                {/*                      onPress={() => this.clickdialogVisibleDoczip()}>*/}
+                {/*        <Image*/}
+                {/*            style={[styles.image,{opacity:0.5}]}*/}
+                {/*            source={require('../../../assets/images/DocZip.png')}*/}
+                {/*        />*/}
+                {/*    </TouchableOpacity>*/}
+                {/*</View>*/}
+
+                <View style={{flex:1,flexDirection:"row",justifyContent:'space-between',marginHorizontal:100}}>
+                    <Icon
+                        name='instagram'
+                        color='#000'
+                        size={25} />
+                    <Icon
+                        name='telegram'
+                        color='#000'
+                        size={25}/>
+                    <Icon
+                        name='facebook'
+                        color='#000'
+                        size={25} />
+                    <Icon
+                        name='whatsapp'
+                        color='#000'
+                        size={25} />
+                </View>
 
                     <Modal
                         animationType="slide"
                         transparent={true}
-                        visible={this.state.modalVisibleMovzip}
-                        //onRequestClose={() => this.setModalVisible(false)}
-                        >
+                        visible={this.state.modalVisibleMovzip}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
                                     <Image
@@ -231,13 +271,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-
     },
     image: {
         width: 150,
         height: 150,
         borderRadius:5,
-        alignSelf:"center"
+        alignSelf:"center",
+
     },
     touchable: {
         width: 150,

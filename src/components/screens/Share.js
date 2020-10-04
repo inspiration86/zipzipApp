@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
     },
+
 });
 
 export default ShareExample;

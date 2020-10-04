@@ -28,7 +28,7 @@ export default class PicZip extends Component {
                             source={require('../../../assets/images/100mfree.png')}/>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('SelectPic')}>
-                                <Image style={{width: '55%', height: 35}}
+                            <Image style={{width: '55%', height: 35}}
                                     source={require('../../../assets/images/ZipZipWhite.png')}/>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.92} onPress={() => this.props.navigation.navigate('Help')}>

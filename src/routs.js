@@ -188,7 +188,7 @@ const RootStack = createStackNavigator({
         },
         },
     {
-       initialRouteName: 'DashboardUser',
+       initialRouteName: 'NotificationLocal',
      // initialRouteName: 'Report',
     },
     {

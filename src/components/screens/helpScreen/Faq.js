@@ -29,8 +29,8 @@ export default class Faq extends Component {
                             size={25}  style={{marginLeft:10}}/>
                     </View>
                     <View style={{justifyContent:"center",alignItems:"center",marginBottom:5}}>
-                        <Text style={{marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,textAlign:"center"}}>Frequently Asked Questions</Text>
-                        <Text style={{marginTop:10,fontFamily: 'FuturaStd-Bold',fontSize:23,textAlign:"center"}}>FAQ</Text>
+                        <Text style={{marginTop:20,fontFamily: 'FuturaStd-Bold',fontSize:18,textAlign:"center",backgroundColor:'#000',color:'#fff',padding:10,width:'100%'}}>Frequently Asked Questions</Text>
+                        <Text style={{marginTop:10,fontFamily: 'FuturaStd-Bold',fontSize:25,textAlign:"center"}}>FAQ</Text>
 
                         <View style={{flexDirection:"row",marginTop:20}}>
                             <Icon
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor:'#fff',
     },
-    divider:{height:2,width:'80%',marginVertical: 5,backgroundColor:"#000"},
+    divider:{height:1,width:'80%',marginVertical: 5,backgroundColor: "#000"},
     question:{
         fontFamily: 'FuturaStd-Bold',
         fontSize:16,

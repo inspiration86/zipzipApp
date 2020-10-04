@@ -132,7 +132,7 @@ const CustomerMyDrawerNavigator = createDrawerNavigator({
                 drawerLabel: (
                     <View style={styles.viewMenu}>
                         <View style={{flex: 9}}>
-                            <Text style={styles.textMenu}>Result</Text>
+                            <Text style={styles.textMenu}>zipzip</Text>
                         </View>
                         <View style={{flex: 2}}>
                             <FontAwesomeIcon icon={faImages} size={30} style={{color: '#fff'}}/>

@@ -62,8 +62,14 @@ export default class Extentions extends Component {
                             </View>
 
                             <Collapse>
-                                <CollapseHeader style={{backgroundColor:"#000",width:"100%",height:55,marginTop:20,padding:15,justifyContent:"center",alignItems:"center"}}>
-                                    <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize: width>400?width*0.05:width*0.04,color:"#fff",paddingHorizontal:10}}>Professional Extentions</Text>
+                                <CollapseHeader style={{backgroundColor:"#000",width:width,height:55,marginTop:20,padding:15,justifyContent:"center",alignItems:"center",alignSelf:"center"}}>
+                                    <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontFamily:'HelveticaNeueLTStd-Md',fontSize: width>400?width*0.05:width*0.04,color:"#fff",paddingHorizontal:10,}}>Professional Extentions</Text>
+                                    <Icon
+                                        name='angle-double-right'
+                                        color='#fff'
+                                        size={30} style={styles.icon}/>
+                                    </View>
                                 </CollapseHeader>
                                 <CollapseBody>
                                     <View style={{marginTop:5,justifyContent:"center",alignItems:"center"}}>
@@ -108,5 +114,5 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor:'#fff'
     },
-
+    icon:{marginLeft:30},
 });

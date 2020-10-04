@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         width:'75%',
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf:'center'
+       alignSelf:'center'
     },
     buttonStyle: {
         backgroundColor: '#000',
@@ -107,16 +107,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginVertical: 10,
         borderRadius:5,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-            marginRight: 16,
-            marginBottom: 12,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 10,
-        shadowColor: '#000',
+
     },
     textButton: {
         color: '#fff',

@@ -52,6 +52,24 @@ export default class PicZip extends Component {
                                    ARKAINVENT.COM </Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={{flex:1,flexDirection:"row",justifyContent:'space-between',marginHorizontal:80,marginTop:30}}>
+                        <Icon
+                            name='instagram'
+                            color='#000'
+                            size={25} />
+                        <Icon
+                            name='telegram'
+                            color='#000'
+                            size={25}/>
+                        <Icon
+                            name='facebook'
+                            color='#000'
+                            size={25} />
+                        <Icon
+                            name='whatsapp'
+                            color='#000'
+                            size={25} />
+                    </View>
                 </ScrollView>
             </View>
         );
